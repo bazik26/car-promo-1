@@ -6,11 +6,11 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        <title>🔥 МЕГА РАСПРОДАЖА АВТО! Скидки до 30%! Осталось 24 из 67! | АвтоМакс</title>
-        <meta name="description" content="⚡ СУПЕР ЦЕНЫ на авто из Европы и Азии! BMW, Mercedes, Audi, Porsche, Lexus. Растаможены и готовы к выдаче! Успей купить!" />
+        <title>Premium Cars From The Future | Exclusive Collection | Future Motors</title>
+        <meta name="description" content="Эксклюзивная коллекция премиум автомобилей. BMW, Mercedes-Benz, Audi, Porsche, Lexus. Растаможены и готовы к выдаче. Ограниченное предложение — 24 из 67." />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-        <meta property="og:title" content="🔥 МЕГА РАСПРОДАЖА АВТО! Скидки до 30%!" />
-        <meta property="og:description" content="Осталось 24 автомобиля из 67! Успей купить по супер-цене! 🚗⚡" />
+        <meta property="og:title" content="Premium Cars From The Future | Future Motors" />
+        <meta property="og:description" content="Эксклюзивная коллекция премиум автомобилей. 24 из 67 в наличии." />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Component {...pageProps} />

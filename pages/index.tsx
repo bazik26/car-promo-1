@@ -52,7 +52,7 @@ export default function Home() {
             transition={{ delay: 0.2, duration: 0.6 }}
             className={styles.badge}
           >
-            🔥 МЕГА РАСПРОДАЖА
+            EXCLUSIVE SALE
           </motion.div>
 
           <motion.h1
@@ -61,9 +61,9 @@ export default function Home() {
             transition={{ delay: 0.4, duration: 0.6 }}
             className={styles.title}
           >
-            АВТО ИЗ ЕВРОПЫ
+            PREMIUM CARS
             <span className={styles.titleGradient}>
-              СО СКИДКАМИ ДО 30%
+              FROM THE FUTURE
             </span>
           </motion.h1>
 
@@ -73,7 +73,7 @@ export default function Home() {
             transition={{ delay: 0.6, duration: 0.6 }}
             className={styles.subtitle}
           >
-            ✅ Растаможены ✅ Готовы к выдаче ✅ Осталось 24 из 67!
+            Растаможены • Готовы к выдаче • 24 из 67 в наличии
           </motion.p>
 
           {/* Timer */}
@@ -83,7 +83,7 @@ export default function Home() {
             transition={{ delay: 0.8, duration: 0.6 }}
             className={styles.timer}
           >
-            <div className={styles.timerLabel}>⏰ АКЦИЯ ЗАКАНЧИВАЕТСЯ ЧЕРЕЗ:</div>
+            <div className={styles.timerLabel}>ПРЕДЛОЖЕНИЕ ИСТЕКАЕТ ЧЕРЕЗ</div>
             <div className={styles.timerBoxes}>
               <div className={styles.timerBox}>
                 <div className={styles.timerValue}>{timeLeft.days}</div>
@@ -168,7 +168,7 @@ export default function Home() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            🔥 УСПЕЙ КУПИТЬ! ОСТАЛОСЬ {stats.remainingCars} АВТО! 🔥
+            ОГРАНИЧЕННАЯ КОЛЛЕКЦИЯ — {stats.remainingCars} АВТОМОБИЛЕЙ
           </motion.h2>
 
           <div className={styles.carsGrid}>
@@ -234,7 +234,7 @@ export default function Home() {
                   href={`tel:+79991234567`}
                   className={styles.carButton}
                 >
-                  📞 ПОЗВОНИТЬ СЕЙЧАС
+                  СВЯЗАТЬСЯ
                 </a>
               </motion.div>
             ))}
@@ -253,11 +253,11 @@ export default function Home() {
         <div className="container">
           <div className={styles.ctaContent}>
             <h2 className={styles.ctaTitle}>
-              ⚡ НЕ УПУСТИ ШАНС! ⚡
+              ЭКСКЛЮЗИВНОЕ ПРЕДЛОЖЕНИЕ
             </h2>
             <p className={styles.ctaText}>
-              Осталось всего {stats.remainingCars} автомобилей из {stats.totalCars}!<br />
-              Звони прямо сейчас и получи МАКСИМАЛЬНУЮ СКИДКУ! 🎁
+              {stats.remainingCars} автомобилей из {stats.totalCars}<br />
+              Свяжитесь с нами для получения персонального предложения
             </p>
             <motion.a
               href="tel:+79991234567"
@@ -265,10 +265,10 @@ export default function Home() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              📞 ПОЗВОНИТЬ ПРЯМО СЕЙЧАС
+              ПОЛУЧИТЬ КОНСУЛЬТАЦИЮ
             </motion.a>
             <div className={styles.ctaNote}>
-              ⚡ Работаем 24/7 • 🚚 Бесплатная доставка • 💯 100% гарантия
+              Консультация • Доставка • Гарантия
             </div>
           </div>
         </div>
@@ -277,9 +277,9 @@ export default function Home() {
       {/* Footer */}
       <footer className={styles.footer}>
         <div className="container">
-          <p>© 2025 АвтоМакс — Лучшие цены на автомобили из Европы и Азии!</p>
+          <p>© 2025 Future Motors — Premium Automotive Collection</p>
           <p className={styles.footerNote}>
-            ⚠️ ВНИМАНИЕ! Количество автомобилей ограничено! Акция действует до {stats.saleEndDate.toLocaleDateString('ru-RU')}. Успей купить! 🔥
+            Ограниченная коллекция. Предложение действительно до {stats.saleEndDate.toLocaleDateString('ru-RU')}
           </p>
         </div>
       </footer>
