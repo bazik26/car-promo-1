@@ -85,12 +85,12 @@
 /* Индикаторы фото */
 .photoIndicators {
   position: absolute;
-  top: 90px;
+  top: 65px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
   gap: 6px;
-  z-index: 15;
+  z-index: 900;
 }
 
 .photoDot {
@@ -110,19 +110,19 @@
 /* Счетчик */
 .photoCounter {
   position: absolute;
-  top: 100px;
+  top: 68px;
   left: 50%;
   transform: translateX(-50%);
   background: rgba(0, 0, 0, 0.7);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.2);
   color: #FFFFFF;
-  padding: 6px 16px;
+  padding: 5px 14px;
   border-radius: 20px;
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 600;
   letter-spacing: 1px;
-  z-index: 15;
+  z-index: 900;
 }
 
 /* Нет фото */
