@@ -3,8 +3,8 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://car-api-production.u
 export interface CarFile {
   id: number;
   carId: number;
-  fileName: string;
-  filePath: string;
+  filename: string;
+  path: string;
   createdAt: string;
   updatedAt: string;
   deletedAt: string | null;
@@ -33,8 +33,27 @@ export interface Car {
 }
 
 export const getFileUrl = (file: CarFile): string => {
-  if (!file || !file.fileName || !file.carId) return '';
-  return `${API_URL}/cars/${file.carId}/${file.fileName}`;
+  if (!file || !file.path) return '';
+  
+  // Если path содержит старый домен shop-ytb-client, заменяем на наш API
+  if (file.path.includes('shop-ytb-client.onrender.com')) {
+    const relativePath = file.path.replace(/https?:\/\/shop-ytb-client\.onrender\.com/, '');
+    const normalizedPath = relativePath.startsWith('/') ? relativePath : `/${relativePath}`;
+    return `${API_URL}${normalizedPath}`;
+  }
+  
+  // Если полный URL (другой домен) - используем как есть
+  if (file.path.startsWith('http')) {
+    return file.path;
+  }
+  
+  // Относительный путь - добавляем API_URL
+  let cleanPath = file.path;
+  if (cleanPath.startsWith('images/')) {
+    cleanPath = cleanPath.replace('images/', '');
+  }
+  const normalizedPath = cleanPath.startsWith('/') ? cleanPath : `/${cleanPath}`;
+  return `${API_URL}${normalizedPath}`;
 };
 
 export const getCars = async (params?: {
