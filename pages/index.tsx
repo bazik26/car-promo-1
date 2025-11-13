@@ -203,11 +203,6 @@ export default function Home() {
             <div className={styles.slideContent}>
               {/* Левая сторона - основная информация */}
               <div className={styles.mainInfo}>
-                <motion.div
-                  initial={{ opacity: 0, x: -50 }}
-                  animate={{ opacity: currentIndex === index ? 1 : 0, x: currentIndex === index ? 0 : -50 }}
-                  transition={{ duration: 0.6, delay: 0.2 }}
-                >
                   <div className={styles.carTags}>
                     {car.promo && <span className={styles.tag}>ПРОМО</span>}
                     <span className={styles.tag}>{car.year} ГОД</span>
@@ -232,75 +227,44 @@ export default function Home() {
                   <a href="tel:+79991234567" className={styles.ctaButton}>
                     УЗНАТЬ ЦЕНУ ПОД КЛЮЧ
                   </a>
-                </motion.div>
               </div>
 
               {/* Правая сторона - иконки характеристик (TikTok style) */}
               <div className={styles.sidePanel}>
-                <motion.div
-                  className={styles.feature}
-                  initial={{ opacity: 0, x: 50 }}
-                  animate={{ opacity: currentIndex === index ? 1 : 0, x: currentIndex === index ? 0 : 50 }}
-                  transition={{ duration: 0.6, delay: 0.3 }}
-                >
+                <div className={styles.feature}>
                   <div className={styles.featureIcon}>📅</div>
                   <div className={styles.featureValue}>{car.year}</div>
                   <div className={styles.featureLabel}>год</div>
-                </motion.div>
+                </div>
 
-                <motion.div
-                  className={styles.feature}
-                  initial={{ opacity: 0, x: 50 }}
-                  animate={{ opacity: currentIndex === index ? 1 : 0, x: currentIndex === index ? 0 : 50 }}
-                  transition={{ duration: 0.6, delay: 0.4 }}
-                >
+                <div className={styles.feature}>
                   <div className={styles.featureIcon}>🛣️</div>
                   <div className={styles.featureValue}>{formatMileage(car.mileage)}</div>
                   <div className={styles.featureLabel}>км</div>
-                </motion.div>
+                </div>
 
-                <motion.div
-                  className={styles.feature}
-                  initial={{ opacity: 0, x: 50 }}
-                  animate={{ opacity: currentIndex === index ? 1 : 0, x: currentIndex === index ? 0 : 50 }}
-                  transition={{ duration: 0.6, delay: 0.5 }}
-                >
+                <div className={styles.feature}>
                   <div className={styles.featureIcon}>⚙️</div>
                   <div className={styles.featureValue}>{car.gearbox}</div>
                   <div className={styles.featureLabel}>КПП</div>
-                </motion.div>
+                </div>
 
-                <motion.div
-                  className={styles.feature}
-                  initial={{ opacity: 0, x: 50 }}
-                  animate={{ opacity: currentIndex === index ? 1 : 0, x: currentIndex === index ? 0 : 50 }}
-                  transition={{ duration: 0.6, delay: 0.6 }}
-                >
+                <div className={styles.feature}>
                   <div className={styles.featureIcon}>⛽</div>
                   <div className={styles.featureValue}>{car.engine}L</div>
                   <div className={styles.featureLabel}>{car.fuel}</div>
-                </motion.div>
+                </div>
 
-                <motion.div
-                  className={styles.feature}
-                  initial={{ opacity: 0, x: 50 }}
-                  animate={{ opacity: currentIndex === index ? 1 : 0, x: currentIndex === index ? 0 : 50 }}
-                  transition={{ duration: 0.6, delay: 0.7 }}
-                >
+                <div className={styles.feature}>
                   <div className={styles.featureIcon}>🏎️</div>
                   <div className={styles.featureValue}>{car.powerValue}</div>
                   <div className={styles.featureLabel}>л.с.</div>
-                </motion.div>
+                </div>
 
-                <motion.div
-                  className={styles.feature}
-                  initial={{ opacity: 0, x: 50 }}
-                  animate={{ opacity: currentIndex === index ? 1 : 0, x: currentIndex === index ? 0 : 50 }}
-                  transition={{ duration: 0.6, delay: 0.8 }}
-                >
+                <div className={styles.feature}>
                   <div className={styles.featureIcon}>-{priceInfo.discount}%</div>
                   <div className={styles.featureLabel}>скидка</div>
-                </motion.div>
+                </div>
               </div>
 
               {/* Нижний индикатор прогресса */}
