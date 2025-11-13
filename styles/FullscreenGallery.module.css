@@ -181,6 +181,85 @@
   50% { opacity: 1; }
 }
 
+/* Footer with Contact Button */
+.footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  padding: 20px;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.95) 0%, transparent 100%);
+}
+
+.contactButton {
+  width: 100%;
+  padding: 18px;
+  background: linear-gradient(135deg, #00F5FF 0%, #00D4E0 100%);
+  color: #000000;
+  border: none;
+  border-radius: 12px;
+  font-weight: 800;
+  font-size: 15px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 24px rgba(0, 245, 255, 0.4);
+}
+
+.contactButton:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(0, 245, 255, 0.6);
+}
+
+.contactForm {
+  margin-top: 16px;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 20px;
+}
+
+.contactOptions {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.contactOption {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 20px 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.contactOption:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(0, 245, 255, 0.5);
+  transform: translateY(-3px);
+}
+
+.contactIcon {
+  font-size: 32px;
+}
+
+.contactText {
+  color: #FFFFFF;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
 /* Mobile */
 @media (max-width: 768px) {
   .navArrow {
@@ -198,7 +277,7 @@
   }
 
   .photoContainer {
-    padding: 80px 10px 100px;
+    padding: 80px 10px 140px;
   }
 
   .indicators {
@@ -209,5 +288,25 @@
   .indicators::-webkit-scrollbar {
     display: none;
   }
+
+  .contactOptions {
+    grid-template-columns: 1fr;
+  }
+
+  .contactOption {
+    flex-direction: row;
+    justify-content: flex-start;
+    padding: 16px 20px;
+  }
+
+  .contactIcon {
+    font-size: 28px;
+  }
+
+  .contactText {
+    flex: 1;
+    text-align: left;
+  }
 }
+
 

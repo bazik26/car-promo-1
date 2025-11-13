@@ -10,6 +10,7 @@ interface FullscreenGalleryProps {
 
 export default function FullscreenGallery({ car, onClose }: FullscreenGalleryProps) {
   const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
+  const [showContact, setShowContact] = useState(false);
 
   const handleDragEnd = (event: any, info: any) => {
     const threshold = 30;
@@ -104,6 +105,59 @@ export default function FullscreenGallery({ car, onClose }: FullscreenGalleryPro
 
       {/* Swipe Hint */}
       <div className={styles.swipeHint}>Свайпайте для просмотра фото</div>
+
+      {/* Contact Button */}
+      <div className={styles.footer}>
+        <button 
+          onClick={(e) => {
+            e.stopPropagation();
+            setShowContact(!showContact);
+          }}
+          className={styles.contactButton}
+        >
+          {showContact ? '✕ Закрыть' : '📞 Связаться по этому авто'}
+        </button>
+
+        {showContact && (
+          <motion.div 
+            className={styles.contactForm}
+            initial={{ y: 100, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: 100, opacity: 0 }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className={styles.contactOptions}>
+              <a 
+                href={`tel:+79991234567`}
+                className={styles.contactOption}
+              >
+                <div className={styles.contactIcon}>📞</div>
+                <div className={styles.contactText}>Позвонить</div>
+              </a>
+
+              <a 
+                href={`https://wa.me/79991234567?text=Здравствуйте! Интересует ${car.brand} ${car.model} ${car.year} за ${new Intl.NumberFormat('ru-RU').format(car.price)} ₽`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.contactOption}
+              >
+                <div className={styles.contactIcon}>💬</div>
+                <div className={styles.contactText}>WhatsApp</div>
+              </a>
+
+              <a 
+                href={`https://t.me/+79991234567`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.contactOption}
+              >
+                <div className={styles.contactIcon}>✈️</div>
+                <div className={styles.contactText}>Telegram</div>
+              </a>
+            </div>
+          </motion.div>
+        )}
+      </div>
     </motion.div>
   );
 }
