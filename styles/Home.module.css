@@ -1,0 +1,484 @@
+.page {
+  min-height: 100vh;
+}
+
+/* Hero Section */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  position: relative;
+  overflow: hidden;
+  padding: 20px;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 20% 50%, rgba(255, 51, 102, 0.3) 0%, transparent 50%),
+              radial-gradient(circle at 80% 80%, rgba(108, 92, 231, 0.3) 0%, transparent 50%);
+  animation: float 8s ease-in-out infinite;
+}
+
+.heroContent {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  max-width: 900px;
+}
+
+.badge {
+  display: inline-block;
+  background: rgba(255, 51, 102, 0.9);
+  color: white;
+  padding: 12px 30px;
+  border-radius: 50px;
+  font-weight: 800;
+  font-size: 16px;
+  letter-spacing: 1px;
+  margin-bottom: 30px;
+  box-shadow: 0 10px 30px rgba(255, 51, 102, 0.4);
+  animation: pulse 2s infinite;
+}
+
+.title {
+  font-size: clamp(40px, 8vw, 80px);
+  font-weight: 900;
+  line-height: 1.1;
+  margin-bottom: 20px;
+  text-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.titleGradient {
+  background: linear-gradient(135deg, #ffd93d 0%, #ff3366 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: inline-block;
+  animation: glow 2s ease-in-out infinite;
+}
+
+.subtitle {
+  font-size: clamp(16px, 3vw, 24px);
+  font-weight: 600;
+  opacity: 0.95;
+  margin-bottom: 40px;
+}
+
+/* Timer */
+.timer {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 30px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.timerLabel {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.timerBoxes {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.timerBox {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 15px;
+  padding: 15px 20px;
+  min-width: 80px;
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.timerValue {
+  font-size: clamp(32px, 5vw, 48px);
+  font-weight: 900;
+  line-height: 1;
+  margin-bottom: 5px;
+}
+
+.timerUnit {
+  font-size: 12px;
+  opacity: 0.8;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.timerSeparator {
+  font-size: 36px;
+  font-weight: 700;
+  opacity: 0.6;
+}
+
+/* Stats Section */
+.stats {
+  padding: 60px 20px;
+  background: linear-gradient(180deg, #0f0f0f 0%, #1a1a1a 100%);
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.statCard {
+  background: linear-gradient(135deg, #2c2c2c 0%, #1a1a1a 100%);
+  border-radius: 20px;
+  padding: 40px 30px;
+  text-align: center;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.statCard:hover {
+  transform: translateY(-10px);
+  border-color: rgba(255, 51, 102, 0.5);
+  box-shadow: 0 20px 40px rgba(255, 51, 102, 0.2);
+}
+
+.statCardPrimary {
+  background: linear-gradient(135deg, #ff3366 0%, #f093fb 100%);
+  border-color: transparent;
+  box-shadow: 0 10px 30px rgba(255, 51, 102, 0.4);
+  animation: pulse 2s infinite;
+}
+
+.statIcon {
+  font-size: 48px;
+  margin-bottom: 15px;
+}
+
+.statValue {
+  font-size: clamp(40px, 6vw, 60px);
+  font-weight: 900;
+  line-height: 1;
+  margin-bottom: 10px;
+}
+
+.statLabel {
+  font-size: 16px;
+  opacity: 0.9;
+  font-weight: 600;
+}
+
+/* Cars Section */
+.carsSection {
+  padding: 80px 20px;
+  background: #0f0f0f;
+}
+
+.sectionTitle {
+  text-align: center;
+  font-size: clamp(28px, 5vw, 48px);
+  font-weight: 900;
+  margin-bottom: 60px;
+  background: linear-gradient(135deg, #ffd93d 0%, #ff3366 50%, #6c5ce7 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.carsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 30px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Car Card */
+.carCard {
+  background: linear-gradient(135deg, #1a1a1a 0%, #2c2c2c 100%);
+  border-radius: 25px;
+  padding: 25px;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.carCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: linear-gradient(90deg, #ff3366, #ffd93d, #6c5ce7);
+}
+
+.carCard:hover {
+  border-color: rgba(255, 51, 102, 0.5);
+  box-shadow: 0 20px 40px rgba(255, 51, 102, 0.3);
+}
+
+.carDiscount {
+  position: absolute;
+  top: 25px;
+  right: 25px;
+  background: linear-gradient(135deg, #ff3366 0%, #f093fb 100%);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 50px;
+  font-weight: 900;
+  font-size: 18px;
+  box-shadow: 0 5px 15px rgba(255, 51, 102, 0.4);
+  z-index: 2;
+}
+
+.carEmoji {
+  font-size: 80px;
+  text-align: center;
+  margin: 20px 0;
+}
+
+.carTags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 15px;
+}
+
+.carTag {
+  background: rgba(108, 92, 231, 0.2);
+  border: 1px solid rgba(108, 92, 231, 0.5);
+  color: #a78bfa;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.carTitle {
+  font-size: 22px;
+  font-weight: 800;
+  margin-bottom: 20px;
+  color: white;
+}
+
+.carSpecs {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.carSpec {
+  font-size: 13px;
+  opacity: 0.8;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.carSpecIcon {
+  font-size: 16px;
+}
+
+.carPriceSection {
+  margin-bottom: 20px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 15px;
+}
+
+.carOldPrice {
+  font-size: 14px;
+  text-decoration: line-through;
+  opacity: 0.5;
+  margin-bottom: 5px;
+}
+
+.carPrice {
+  font-size: 28px;
+  font-weight: 900;
+  background: linear-gradient(135deg, #ffd93d 0%, #ff3366 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.carButton {
+  display: block;
+  width: 100%;
+  padding: 16px;
+  background: linear-gradient(135deg, #ff3366 0%, #f093fb 100%);
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 15px;
+  font-weight: 800;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.carButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(255, 51, 102, 0.4);
+}
+
+/* CTA Section */
+.cta {
+  padding: 80px 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  position: relative;
+  overflow: hidden;
+}
+
+.cta::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+}
+
+.ctaContent {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.ctaTitle {
+  font-size: clamp(32px, 6vw, 60px);
+  font-weight: 900;
+  margin-bottom: 20px;
+  text-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.ctaText {
+  font-size: clamp(18px, 3vw, 24px);
+  margin-bottom: 40px;
+  line-height: 1.5;
+}
+
+.ctaButton {
+  display: inline-block;
+  padding: 25px 60px;
+  background: rgba(255, 255, 255, 0.95);
+  color: #ff3366;
+  text-decoration: none;
+  border-radius: 50px;
+  font-weight: 900;
+  font-size: clamp(18px, 3vw, 24px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  animation: pulse 2s infinite;
+}
+
+.ctaButton:hover {
+  background: white;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+}
+
+.ctaNote {
+  margin-top: 30px;
+  font-size: 16px;
+  opacity: 0.9;
+}
+
+/* Footer */
+.footer {
+  padding: 40px 20px;
+  background: #0a0a0a;
+  text-align: center;
+  border-top: 2px solid rgba(255, 51, 102, 0.3);
+}
+
+.footer p {
+  margin: 10px 0;
+  opacity: 0.7;
+}
+
+.footerNote {
+  margin-top: 20px;
+  padding: 15px;
+  background: rgba(255, 51, 102, 0.1);
+  border-radius: 10px;
+  font-size: 14px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero {
+    min-height: 100svh;
+  }
+  
+  .timerBoxes {
+    gap: 5px;
+  }
+
+  .timerBox {
+    min-width: 60px;
+    padding: 10px 15px;
+  }
+
+  .timerSeparator {
+    font-size: 24px;
+  }
+
+  .carsGrid {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+
+  .statsGrid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .badge {
+    font-size: 14px;
+    padding: 10px 20px;
+  }
+
+  .timer {
+    padding: 20px 15px;
+  }
+
+  .timerBox {
+    min-width: 50px;
+    padding: 8px 10px;
+  }
+
+  .carCard {
+    padding: 20px;
+  }
+
+  .carEmoji {
+    font-size: 60px;
+  }
+}
+
