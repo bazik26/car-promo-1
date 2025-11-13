@@ -15,41 +15,27 @@
 .photo {
   position: absolute;
   inset: 0;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
   cursor: grab;
   user-select: none;
   touch-action: pan-x;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
-/* Размытый фон (Instagram Stories style) */
+/* Виньетирование для лучшей читаемости */
 .photo::before {
   content: '';
   position: absolute;
   inset: 0;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-image: inherit;
-  filter: blur(40px) brightness(0.6);
-  transform: scale(1.1);
+  background: radial-gradient(
+    ellipse at center,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.2) 40%,
+    rgba(0, 0, 0, 0.7) 100%
+  );
   z-index: 1;
-}
-
-/* Основное фото по центру (сохраняет пропорции) */
-.photo::after {
-  content: '';
-  position: absolute;
-  top: 100px;
-  left: 5%;
-  right: 5%;
-  bottom: 160px;
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-image: inherit;
-  z-index: 2;
+  pointer-events: none;
 }
 
 .photo:active {
