@@ -6,29 +6,31 @@
   background: #000000;
 }
 
-/* Фиксированный Header - Minimal */
+/* Фиксированный Header - Compact with filters */
 .header {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 1000;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.4) 80%, transparent 100%);
-  padding: 16px 20px 60px;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.5) 90%, transparent 100%);
+  padding: 12px 16px 50px;
   pointer-events: none;
 }
 
-.headerContent {
+.headerTop {
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  max-width: 100%;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 12px;
+  pointer-events: auto;
 }
 
-.headerLeft {
+.headerFilters {
   display: flex;
-  flex-direction: column;
   gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
   pointer-events: auto;
 }
 
@@ -83,6 +85,81 @@
 
 .timerValue {
   color: #00F5FF;
+}
+
+/* Компактные фильтры в header */
+.filterInputCompact,
+.filterSelectCompact {
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  padding: 6px 12px;
+  color: #FFFFFF;
+  font-size: 11px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.filterInputCompact {
+  flex: 1;
+  min-width: 120px;
+  max-width: 180px;
+}
+
+.filterSelectCompact {
+  min-width: 90px;
+}
+
+.filterInputCompact:focus,
+.filterSelectCompact:focus {
+  outline: none;
+  border-color: #00F5FF;
+  background: rgba(0, 0, 0, 0.8);
+  box-shadow: 0 0 0 2px rgba(0, 245, 255, 0.1);
+}
+
+.filterInputCompact::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 11px;
+}
+
+.filterSelectCompact option {
+  background: #1a1a1a;
+  color: #FFFFFF;
+}
+
+.applyButtonCompact,
+.clearButtonCompact {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(0, 245, 255, 0.15);
+  color: #00F5FF;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.applyButtonCompact:hover {
+  background: rgba(0, 245, 255, 0.3);
+  border-color: #00F5FF;
+}
+
+.clearButtonCompact {
+  background: rgba(255, 0, 110, 0.15);
+  color: #FF006E;
+  border-color: rgba(255, 0, 110, 0.3);
+}
+
+.clearButtonCompact:hover {
+  background: rgba(255, 0, 110, 0.3);
+  border-color: #FF006E;
 }
 
 /* Контейнер для вертикальной прокрутки */
@@ -385,20 +462,24 @@
 
 /* Responsive */
 @media (max-width: 768px) {
-  .headerContent {
+  .headerTop {
     flex-direction: column;
     gap: 8px;
     align-items: flex-start;
   }
 
-  .headerLeft {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
+  .headerFilters {
+    width: 100%;
   }
 
-  .headerTimer {
-    align-self: flex-end;
+  .filterInputCompact {
+    flex: 1;
+    min-width: 100px;
+    max-width: none;
+  }
+
+  .filterSelectCompact {
+    min-width: 80px;
   }
 
   .slideContent {

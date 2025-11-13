@@ -194,108 +194,62 @@ export default function Home() {
 
   return (
     <div className={styles.app}>
-      {/* Фиксированный Header с фильтрами */}
+      {/* Компактный Header с инлайн-фильтрами */}
       <motion.div 
         className={styles.header}
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6 }}
       >
-        <div className={styles.headerContent}>
-          <div className={styles.headerLeft}>
-            <div className={styles.badge}>РАСПРОДАЖА СКЛАДА</div>
-            <div className={styles.stockInfo}>
-              Найдено <span className={styles.highlight}>{cars.length}</span> авто
-            </div>
+        <div className={styles.headerTop}>
+          <div className={styles.badge}>РАСПРОДАЖА СКЛАДА</div>
+          <div className={styles.stockInfo}>
+            Найдено <span className={styles.highlight}>{cars.length}</span> авто
           </div>
-          <button 
-            className={filterStyles.filterButton}
-            onClick={() => setShowFilters(!showFilters)}
+        </div>
+        
+        <div className={styles.headerFilters}>
+          <input 
+            type="text" 
+            placeholder="Марка/модель..."
+            value={filters.search || ''}
+            onChange={(e) => setFilters({...filters, search: e.target.value})}
+            onKeyDown={(e) => e.key === 'Enter' && applyFilters()}
+            className={styles.filterInputCompact}
+          />
+          
+          <select 
+            value={filters.gearbox || ''}
+            onChange={(e) => setFilters({...filters, gearbox: e.target.value || undefined})}
+            className={styles.filterSelectCompact}
           >
-            🔍 Фильтры
+            <option value="">КПП</option>
+            <option value="Автомат">Автомат</option>
+            <option value="Механика">Механика</option>
+          </select>
+
+          <select 
+            value={filters.fuel || ''}
+            onChange={(e) => setFilters({...filters, fuel: e.target.value || undefined})}
+            className={styles.filterSelectCompact}
+          >
+            <option value="">Топливо</option>
+            <option value="Бензин">Бензин</option>
+            <option value="Дизель">Дизель</option>
+            <option value="Гибрид">Гибрид</option>
+          </select>
+
+          <button onClick={applyFilters} className={styles.applyButtonCompact}>
+            ✓
           </button>
+          
+          {(filters.search || filters.gearbox || filters.fuel || filters.maxPrice) && (
+            <button onClick={clearFilters} className={styles.clearButtonCompact}>
+              ✕
+            </button>
+          )}
         </div>
       </motion.div>
-
-      {/* Панель фильтров */}
-      <AnimatePresence>
-        {showFilters && (
-          <motion.div 
-            className={filterStyles.filterPanel}
-            initial={{ y: -300, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            exit={{ y: -300, opacity: 0 }}
-            transition={{ duration: 0.4 }}
-          >
-            <div className={filterStyles.filterContent}>
-              <div className={filterStyles.filterRow}>
-                <div className={filterStyles.filterGroup}>
-                  <label>Марка/Модель</label>
-                  <input 
-                    type="text" 
-                    placeholder="BMW X5..."
-                    value={filters.search || ''}
-                    onChange={(e) => setFilters({...filters, search: e.target.value})}
-                    className={filterStyles.filterInput}
-                  />
-                </div>
-
-                <div className={filterStyles.filterGroup}>
-                  <label>Цена до (₽)</label>
-                  <input 
-                    type="number" 
-                    placeholder="10000000"
-                    value={filters.maxPrice || ''}
-                    onChange={(e) => setFilters({...filters, maxPrice: e.target.value ? parseInt(e.target.value) : undefined})}
-                    className={filterStyles.filterInput}
-                  />
-                </div>
-              </div>
-
-              <div className={filterStyles.filterRow}>
-                <div className={filterStyles.filterGroup}>
-                  <label>Коробка</label>
-                  <select 
-                    value={filters.gearbox || ''}
-                    onChange={(e) => setFilters({...filters, gearbox: e.target.value || undefined})}
-                    className={filterStyles.filterSelect}
-                  >
-                    <option value="">Все</option>
-                    <option value="Автомат">Автомат</option>
-                    <option value="Механика">Механика</option>
-                    <option value="Робот">Робот</option>
-                    <option value="Вариатор">Вариатор</option>
-                  </select>
-                </div>
-
-                <div className={filterStyles.filterGroup}>
-                  <label>Топливо</label>
-                  <select 
-                    value={filters.fuel || ''}
-                    onChange={(e) => setFilters({...filters, fuel: e.target.value || undefined})}
-                    className={filterStyles.filterSelect}
-                  >
-                    <option value="">Все</option>
-                    <option value="Бензин">Бензин</option>
-                    <option value="Дизель">Дизель</option>
-                    <option value="Гибрид">Гибрид</option>
-                    <option value="Электро">Электро</option>
-                  </select>
-                </div>
-              </div>
-
-              <div className={filterStyles.filterActions}>
-                <button onClick={applyFilters} className={filterStyles.applyButton}>
-                  Применить
-                </button>
-                <button onClick={clearFilters} className={filterStyles.clearButton}>
-                  Сбросить
-                </button>
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
 
       {/* Вертикальная лента карточек */}
       <div className={styles.scrollContainer} ref={containerRef}>

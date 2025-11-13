@@ -41,7 +41,10 @@
 .photo::after {
   content: '';
   position: absolute;
-  inset: 20px;
+  top: 100px;
+  left: 5%;
+  right: 5%;
+  bottom: 160px;
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
