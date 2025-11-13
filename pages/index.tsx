@@ -52,7 +52,7 @@ export default function Home() {
             transition={{ delay: 0.2, duration: 0.6 }}
             className={styles.badge}
           >
-            EXCLUSIVE SALE
+            РАСПРОДАЖА СКЛАДА
           </motion.div>
 
           <motion.h1
@@ -61,9 +61,9 @@ export default function Home() {
             transition={{ delay: 0.4, duration: 0.6 }}
             className={styles.title}
           >
-            PREMIUM CARS
+            АВТОМОБИЛИ ИЗ ЕВРОПЫ
             <span className={styles.titleGradient}>
-              FROM THE FUTURE
+              ПОД КЛЮЧ С ДОКУМЕНТАМИ
             </span>
           </motion.h1>
 
@@ -73,7 +73,7 @@ export default function Home() {
             transition={{ delay: 0.6, duration: 0.6 }}
             className={styles.subtitle}
           >
-            Растаможены • Готовы к выдаче • 24 из 67 в наличии
+            Растаможка • Доставка • Оформление в ГИБДД • Экономия до 30%
           </motion.p>
 
           {/* Timer */}
@@ -162,7 +162,7 @@ export default function Home() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            ОГРАНИЧЕННАЯ КОЛЛЕКЦИЯ — {stats.remainingCars} АВТОМОБИЛЕЙ
+            ДОСТУПНО К ПОКУПКЕ — {stats.remainingCars} АВТОМОБИЛЕЙ
           </motion.h2>
 
           <div className={styles.carsGrid}>
@@ -228,7 +228,7 @@ export default function Home() {
                   href={`tel:+79991234567`}
                   className={styles.carButton}
                 >
-                  СВЯЗАТЬСЯ
+                  УЗНАТЬ ЦЕНУ ПОД КЛЮЧ
                 </a>
               </motion.div>
             ))}
@@ -247,22 +247,32 @@ export default function Home() {
         <div className="container">
           <div className={styles.ctaContent}>
             <h2 className={styles.ctaTitle}>
-              ЭКСКЛЮЗИВНОЕ ПРЕДЛОЖЕНИЕ
+              ПОЛУЧИТЕ РАСЧЕТ СТОИМОСТИ
             </h2>
             <p className={styles.ctaText}>
-              {stats.remainingCars} автомобилей из {stats.totalCars}<br />
-              Свяжитесь с нами для получения персонального предложения
+              Осталось {stats.remainingCars} автомобилей в наличии<br />
+              Позвоните сейчас — рассчитаем точную стоимость под ключ за 5 минут
             </p>
-            <motion.a
-              href="tel:+79991234567"
-              className={styles.ctaButton}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              ПОЛУЧИТЬ КОНСУЛЬТАЦИЮ
-            </motion.a>
+            <motion.div className={styles.ctaButtons}>
+              <motion.a
+                href="tel:+79991234567"
+                className={styles.ctaButton}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                ПОЗВОНИТЬ СЕЙЧАС
+              </motion.a>
+              <motion.a
+                href="https://wa.me/79991234567"
+                className={styles.ctaButtonSecondary}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                НАПИСАТЬ В WHATSAPP
+              </motion.a>
+            </motion.div>
             <div className={styles.ctaNote}>
-              Консультация • Доставка • Гарантия
+              Бесплатная консультация • Помощь с доставкой • Юридическое сопровождение
             </div>
           </div>
         </div>
@@ -271,9 +281,9 @@ export default function Home() {
       {/* Footer */}
       <footer className={styles.footer}>
         <div className="container">
-          <p>© 2025 Future Motors — Premium Automotive Collection</p>
+          <p>© 2025 АвтоИмпорт — Официальная доставка автомобилей из Европы и Азии</p>
           <p className={styles.footerNote}>
-            Ограниченная коллекция. Предложение действительно до {stats.saleEndDate.toLocaleDateString('ru-RU')}
+            Акция действует до {stats.saleEndDate.toLocaleDateString('ru-RU')}. Количество автомобилей ограничено. Все автомобили растаможены и имеют полный пакет документов.
           </p>
         </div>
       </footer>
