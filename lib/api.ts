@@ -33,8 +33,8 @@ export interface Car {
 }
 
 export const getFileUrl = (file: CarFile): string => {
-  if (!file) return '';
-  return `${API_URL}/files/${file.fileName}`;
+  if (!file || !file.fileName || !file.carId) return '';
+  return `${API_URL}/cars/${file.carId}/${file.fileName}`;
 };
 
 export const getCars = async (params?: {
