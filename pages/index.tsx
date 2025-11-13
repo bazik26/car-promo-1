@@ -1,10 +1,25 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import CountUp from 'react-countup';
-import { promoCars, stats } from '@/data/cars';
+import { getCars, getFileUrl, Car as ApiCar } from '@/lib/api';
+import PhotoGallery from '@/components/PhotoGallery';
 import styles from '@/styles/TikTok.module.css';
 
+interface Stats {
+  totalCars: number;
+  remainingCars: number;
+  soldCars: number;
+  saleEndDate: Date;
+}
+
 export default function Home() {
+  const [cars, setCars] = useState<ApiCar[]>([]);
+  const [stats, setStats] = useState<Stats>({
+    totalCars: 0,
+    remainingCars: 0,
+    soldCars: 0,
+    saleEndDate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
+  });
   const [currentIndex, setCurrentIndex] = useState(0);
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
@@ -12,9 +27,32 @@ export default function Home() {
     minutes: 0,
     seconds: 0
   });
+  const [isLoading, setIsLoading] = useState(true);
 
   const containerRef = useRef<HTMLDivElement>(null);
   const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Загружаем машины из API
+  useEffect(() => {
+    const loadCars = async () => {
+      setIsLoading(true);
+      const fetchedCars = await getCars({ limit: 24, random: true });
+      const availableCars = fetchedCars.filter(car => !car.isSold);
+      setCars(availableCars);
+      
+      // Обновляем статистику
+      setStats({
+        totalCars: 67,
+        remainingCars: availableCars.length,
+        soldCars: 67 - availableCars.length,
+        saleEndDate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
+      });
+      
+      setIsLoading(false);
+    };
+
+    loadCars();
+  }, []);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -46,7 +84,7 @@ export default function Home() {
         const windowHeight = window.innerHeight;
         const newIndex = Math.round(scrollTop / windowHeight);
         
-        if (newIndex !== currentIndex && newIndex >= 0 && newIndex < promoCars.length) {
+        if (newIndex !== currentIndex && newIndex >= 0 && newIndex < cars.length) {
           setCurrentIndex(newIndex);
           containerRef.current!.scrollTo({
             top: newIndex * windowHeight,
@@ -71,8 +109,39 @@ export default function Home() {
     return new Intl.NumberFormat('ru-RU').format(mileage);
   };
 
+  const calculateDiscount = (price: number) => {
+    // Примерная скидка для промо (15-30%)
+    const discountPercent = Math.floor(15 + Math.random() * 15);
+    return {
+      discount: discountPercent,
+      oldPrice: Math.round(price / (1 - discountPercent / 100)),
+      savings: Math.round(price / (1 - discountPercent / 100)) - price
+    };
+  };
+
+  if (isLoading) {
+    return (
+      <div className={styles.app}>
+        <div className={styles.loading}>
+          <div className={styles.loadingSpinner}></div>
+          <div className={styles.loadingText}>Загружаем автомобили...</div>
+        </div>
+      </div>
+    );
+  }
+
+  if (cars.length === 0) {
+    return (
+      <div className={styles.app}>
+        <div className={styles.loading}>
+          <div className={styles.loadingText}>Нет доступных автомобилей</div>
+        </div>
+      </div>
+    );
+  }
+
   const scrollToNext = () => {
-    if (currentIndex < promoCars.length - 1) {
+    if (currentIndex < cars.length - 1) {
       setCurrentIndex(currentIndex + 1);
       containerRef.current?.scrollTo({
         top: (currentIndex + 1) * window.innerHeight,
@@ -119,15 +188,13 @@ export default function Home() {
 
       {/* Вертикальная лента карточек */}
       <div className={styles.scrollContainer} ref={containerRef}>
-        {promoCars.map((car, index) => (
+        {cars.map((car, index) => {
+          const priceInfo = calculateDiscount(car.price);
+          
+          return (
           <div key={car.id} className={styles.slide}>
-            {/* Фоновое изображение */}
-            <div 
-              className={styles.slideBackground}
-              style={{
-                backgroundImage: `url(${car.image})`
-              }}
-            />
+            {/* Галерея фотографий с свайпом */}
+            <PhotoGallery photos={car.files} getFileUrl={getFileUrl} />
             
             {/* Градиентный оверлей */}
             <div className={styles.slideOverlay} />
@@ -142,9 +209,9 @@ export default function Home() {
                   transition={{ duration: 0.6, delay: 0.2 }}
                 >
                   <div className={styles.carTags}>
-                    {car.tags.map((tag, i) => (
-                      <span key={i} className={styles.tag}>{tag}</span>
-                    ))}
+                    {car.promo && <span className={styles.tag}>ПРОМО</span>}
+                    <span className={styles.tag}>{car.year} ГОД</span>
+                    <span className={styles.tag}>{car.fuel.toUpperCase()}</span>
                   </div>
                   
                   <h2 className={styles.carBrand}>{car.brand}</h2>
@@ -152,13 +219,13 @@ export default function Home() {
                   
                   <div className={styles.priceBlock}>
                     <div className={styles.oldPrice}>
-                      {formatPrice(Math.round(car.price / (1 - car.discount / 100)))} ₽
+                      {formatPrice(priceInfo.oldPrice)} ₽
                     </div>
                     <div className={styles.newPrice}>
                       {formatPrice(car.price)} ₽
                     </div>
                     <div className={styles.saveAmount}>
-                      Экономия {formatPrice(Math.round(car.price / (1 - car.discount / 100)) - car.price)} ₽
+                      Экономия {formatPrice(priceInfo.savings)} ₽
                     </div>
                   </div>
 
@@ -199,7 +266,7 @@ export default function Home() {
                   transition={{ duration: 0.6, delay: 0.5 }}
                 >
                   <div className={styles.featureIcon}>⚙️</div>
-                  <div className={styles.featureValue}>{car.transmission.split(' ')[0]}</div>
+                  <div className={styles.featureValue}>{car.gearbox}</div>
                   <div className={styles.featureLabel}>КПП</div>
                 </motion.div>
 
@@ -210,7 +277,7 @@ export default function Home() {
                   transition={{ duration: 0.6, delay: 0.6 }}
                 >
                   <div className={styles.featureIcon}>⛽</div>
-                  <div className={styles.featureValue}>{car.engine}</div>
+                  <div className={styles.featureValue}>{car.engine}L</div>
                   <div className={styles.featureLabel}>{car.fuel}</div>
                 </motion.div>
 
@@ -220,9 +287,9 @@ export default function Home() {
                   animate={{ opacity: currentIndex === index ? 1 : 0, x: currentIndex === index ? 0 : 50 }}
                   transition={{ duration: 0.6, delay: 0.7 }}
                 >
-                  <div className={styles.featureIcon}>🌍</div>
-                  <div className={styles.featureValue}>{car.origin}</div>
-                  <div className={styles.featureLabel}>откуда</div>
+                  <div className={styles.featureIcon}>🏎️</div>
+                  <div className={styles.featureValue}>{car.powerValue}</div>
+                  <div className={styles.featureLabel}>л.с.</div>
                 </motion.div>
 
                 <motion.div
@@ -231,14 +298,14 @@ export default function Home() {
                   animate={{ opacity: currentIndex === index ? 1 : 0, x: currentIndex === index ? 0 : 50 }}
                   transition={{ duration: 0.6, delay: 0.8 }}
                 >
-                  <div className={styles.featureIcon}>-{car.discount}%</div>
+                  <div className={styles.featureIcon}>-{priceInfo.discount}%</div>
                   <div className={styles.featureLabel}>скидка</div>
                 </motion.div>
               </div>
 
               {/* Нижний индикатор прогресса */}
               <div className={styles.progressIndicator}>
-                {promoCars.map((_, idx) => (
+                {cars.map((_, idx) => (
                   <div
                     key={idx}
                     className={`${styles.progressDot} ${idx === currentIndex ? styles.progressDotActive : ''}`}
@@ -256,10 +323,11 @@ export default function Home() {
 
             {/* Скидочный бейдж */}
             <div className={styles.discountBadge}>
-              -{car.discount}%
+              -{priceInfo.discount}%
             </div>
           </div>
-        ))}
+        );
+        })}
       </div>
 
       {/* Навигационные стрелки */}
@@ -268,7 +336,7 @@ export default function Home() {
           ↑
         </button>
       )}
-      {currentIndex < promoCars.length - 1 && (
+      {currentIndex < cars.length - 1 && (
         <button className={styles.navButton} style={{ bottom: '100px' }} onClick={scrollToNext}>
           ↓
         </button>
