@@ -6,68 +6,79 @@
   background: #000000;
 }
 
-/* Фиксированный Header */
+/* Фиксированный Header - Minimal */
 .header {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 100;
-  background: rgba(0, 0, 0, 0.8);
-  backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 12px 20px;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.8) 0%, transparent 100%);
+  padding: 20px 20px 40px;
+  pointer-events: none;
 }
 
 .headerContent {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   max-width: 100%;
 }
 
 .headerLeft {
   display: flex;
-  align-items: center;
-  gap: 16px;
+  flex-direction: column;
+  gap: 8px;
+  pointer-events: auto;
 }
 
 .badge {
-  background: linear-gradient(135deg, #00F5FF, #B026FF);
-  color: #000000;
-  padding: 6px 16px;
-  border-radius: 20px;
-  font-size: 11px;
-  font-weight: 700;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #FFFFFF;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 10px;
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 1.5px;
+  display: inline-block;
+  width: fit-content;
 }
 
 .stockInfo {
-  font-size: 12px;
-  color: #FFFFFF;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.8);
   font-weight: 500;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  padding: 6px 12px;
+  border-radius: 6px;
+  width: fit-content;
 }
 
 .highlight {
   color: #00F5FF;
   font-weight: 700;
-  font-size: 16px;
+  font-size: 14px;
 }
 
 .headerTimer {
-  display: flex;
-  align-items: center;
+  pointer-events: auto;
 }
 
 .timerCompact {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  font-size: 14px;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 13px;
   font-weight: 600;
   color: #00F5FF;
   font-variant-numeric: tabular-nums;
+  letter-spacing: 1px;
 }
 
 .timerValue {
@@ -104,7 +115,7 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  filter: brightness(0.7);
+  z-index: 1;
 }
 
 /* Градиентный оверлей для читаемости */
@@ -113,10 +124,11 @@
   inset: 0;
   background: linear-gradient(
     180deg,
-    rgba(0, 0, 0, 0.2) 0%,
-    rgba(0, 0, 0, 0.6) 50%,
-    rgba(0, 0, 0, 0.9) 100%
+    rgba(0, 0, 0, 0.3) 0%,
+    rgba(0, 0, 0, 0.5) 40%,
+    rgba(0, 0, 0, 0.85) 100%
   );
+  z-index: 2;
 }
 
 /* Контент слайда */
@@ -127,7 +139,8 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  padding: 80px 24px 100px;
+  padding: 100px 24px 120px;
+  z-index: 3;
 }
 
 /* Основная информация слева-внизу */
@@ -139,165 +152,173 @@
 .carTags {
   display: flex;
   gap: 8px;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
   flex-wrap: wrap;
 }
 
 .tag {
-  background: rgba(0, 245, 255, 0.15);
+  background: rgba(0, 0, 0, 0.7);
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(0, 245, 255, 0.3);
-  color: #00F5FF;
-  padding: 6px 14px;
-  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #FFFFFF;
+  padding: 7px 16px;
+  border-radius: 8px;
   font-size: 11px;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 1.2px;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
 }
 
 .carBrand {
-  font-size: clamp(18px, 3vw, 24px);
+  font-size: clamp(16px, 3vw, 20px);
   font-weight: 600;
-  color: rgba(255, 255, 255, 0.7);
-  margin-bottom: 4px;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 6px;
   text-transform: uppercase;
-  letter-spacing: 2px;
+  letter-spacing: 3px;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.9);
 }
 
 .carModel {
-  font-size: clamp(32px, 6vw, 56px);
-  font-weight: 800;
+  font-size: clamp(36px, 8vw, 64px);
+  font-weight: 900;
   color: #FFFFFF;
-  margin-bottom: 24px;
-  line-height: 1.1;
-  letter-spacing: -0.02em;
-  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  margin-bottom: 28px;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  text-shadow: 0 4px 24px rgba(0, 0, 0, 0.9);
 }
 
 /* Блок цены */
 .priceBlock {
-  background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 20px;
-  padding: 20px 24px;
-  margin-bottom: 24px;
-  max-width: 400px;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(25px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 16px;
+  padding: 24px 28px;
+  margin-bottom: 28px;
+  max-width: 100%;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
 }
 
 .oldPrice {
-  font-size: 14px;
+  font-size: 15px;
   text-decoration: line-through;
-  color: rgba(255, 255, 255, 0.4);
-  margin-bottom: 6px;
+  color: rgba(255, 255, 255, 0.5);
+  margin-bottom: 8px;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
 }
 
 .newPrice {
-  font-size: clamp(32px, 5vw, 42px);
+  font-size: clamp(36px, 7vw, 48px);
   font-weight: 800;
-  background: linear-gradient(135deg, #FFFFFF, #00F5FF);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  margin-bottom: 8px;
+  color: #FFFFFF;
+  margin-bottom: 10px;
   line-height: 1;
+  text-shadow: 0 4px 16px rgba(0, 245, 255, 0.6);
 }
 
 .saveAmount {
-  font-size: 13px;
-  color: #39FF14;
-  font-weight: 600;
+  font-size: 14px;
+  color: #00F5FF;
+  font-weight: 700;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
 }
 
 /* CTA кнопка */
 .ctaButton {
   display: inline-block;
-  padding: 18px 48px;
-  background: linear-gradient(135deg, #00F5FF, #00D4E0);
+  padding: 20px 52px;
+  background: #00F5FF;
   color: #000000;
   text-decoration: none;
-  border-radius: 50px;
-  font-weight: 700;
-  font-size: 15px;
-  letter-spacing: 1px;
+  border-radius: 12px;
+  font-weight: 800;
+  font-size: 14px;
+  letter-spacing: 1.5px;
   text-transform: uppercase;
   transition: all 0.3s ease;
-  box-shadow: 0 8px 24px rgba(0, 245, 255, 0.4);
+  box-shadow: 0 8px 32px rgba(0, 245, 255, 0.5);
+  border: none;
 }
 
 .ctaButton:hover {
-  transform: scale(1.05);
-  box-shadow: 0 12px 32px rgba(0, 245, 255, 0.6);
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 12px 40px rgba(0, 245, 255, 0.7);
+  background: #00D4E0;
 }
 
 /* Боковая панель с иконками (TikTok style) */
 .sidePanel {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 16px;
   align-items: center;
-  padding-right: 8px;
+  padding-right: 4px;
 }
 
 .feature {
-  background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 20px;
-  padding: 16px 12px;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 16px;
+  padding: 14px 10px;
   text-align: center;
-  min-width: 90px;
+  min-width: 85px;
   transition: all 0.3s ease;
 }
 
 .feature:hover {
-  transform: scale(1.1);
-  border-color: rgba(0, 245, 255, 0.5);
-  box-shadow: 0 8px 24px rgba(0, 245, 255, 0.3);
+  transform: scale(1.08);
+  border-color: rgba(0, 245, 255, 0.6);
+  background: rgba(0, 0, 0, 0.85);
+  box-shadow: 0 4px 16px rgba(0, 245, 255, 0.4);
 }
 
 .featureIcon {
-  font-size: 28px;
-  margin-bottom: 8px;
-  filter: drop-shadow(0 2px 8px rgba(0, 245, 255, 0.5));
+  font-size: 26px;
+  margin-bottom: 6px;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.8));
 }
 
 .featureValue {
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 700;
   color: #FFFFFF;
-  margin-bottom: 4px;
-  line-height: 1;
+  margin-bottom: 3px;
+  line-height: 1.1;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
 }
 
 .featureLabel {
-  font-size: 10px;
-  color: rgba(255, 255, 255, 0.5);
+  font-size: 9px;
+  color: rgba(255, 255, 255, 0.6);
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 0.5px;
   font-weight: 600;
 }
 
 /* Скидочный бейдж (как в TikTok правый верхний) */
 .discountBadge {
   position: absolute;
-  top: 80px;
+  top: 90px;
   right: 24px;
   background: linear-gradient(135deg, #FF006E, #FF4D4D);
   color: #FFFFFF;
-  padding: 16px 20px;
+  padding: 0;
   border-radius: 50%;
   font-weight: 900;
-  font-size: 20px;
-  width: 80px;
-  height: 80px;
+  font-size: 22px;
+  width: 75px;
+  height: 75px;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 8px 24px rgba(255, 0, 110, 0.5);
+  box-shadow: 0 8px 32px rgba(255, 0, 110, 0.7);
   animation: glow-pulse 2s ease-in-out infinite;
-  z-index: 10;
+  z-index: 20;
+  border: 3px solid rgba(255, 255, 255, 0.2);
 }
 
 /* Индикатор прогресса (точки) */
@@ -332,14 +353,14 @@
   position: fixed;
   left: 50%;
   transform: translateX(-50%);
-  width: 48px;
-  height: 48px;
-  background: rgba(0, 0, 0, 0.6);
+  width: 44px;
+  height: 44px;
+  background: rgba(0, 0, 0, 0.7);
   backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.25);
   border-radius: 50%;
-  color: #00F5FF;
-  font-size: 24px;
+  color: #FFFFFF;
+  font-size: 20px;
   cursor: pointer;
   transition: all 0.3s ease;
   z-index: 50;
@@ -349,9 +370,10 @@
 }
 
 .navButton:hover {
-  background: rgba(0, 245, 255, 0.2);
+  background: rgba(0, 245, 255, 0.3);
   border-color: #00F5FF;
-  transform: translateX(-50%) scale(1.1);
+  transform: translateX(-50%) scale(1.15);
+  color: #00F5FF;
 }
 
 /* Responsive */
