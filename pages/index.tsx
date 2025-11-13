@@ -4,6 +4,7 @@ import CountUp from 'react-countup';
 import { getCars, getFileUrl, Car as ApiCar } from '@/lib/api';
 import PhotoGallery from '@/components/PhotoGallery';
 import styles from '@/styles/TikTok.module.css';
+import filterStyles from '@/styles/Filters.module.css';
 
 interface Stats {
   totalCars: number;
@@ -21,13 +22,15 @@ export default function Home() {
     saleEndDate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
   });
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [timeLeft, setTimeLeft] = useState({
-    days: 0,
-    hours: 0,
-    minutes: 0,
-    seconds: 0
-  });
   const [isLoading, setIsLoading] = useState(true);
+  const [showFilters, setShowFilters] = useState(false);
+  const [filters, setFilters] = useState<{
+    search?: string;
+    maxPrice?: number;
+    gearbox?: string;
+    fuel?: string;
+  }>({});
+  const [allCars, setAllCars] = useState<ApiCar[]>([]);
 
   const containerRef = useRef<HTMLDivElement>(null);
   const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -36,8 +39,13 @@ export default function Home() {
   useEffect(() => {
     const loadCars = async () => {
       setIsLoading(true);
-      const fetchedCars = await getCars({ limit: 24, random: true });
+      const fetchedCars = await getCars({ limit: 50 });
       const availableCars = fetchedCars.filter(car => !car.isSold);
+      
+      console.log('Loaded cars:', availableCars.length);
+      console.log('First car files:', availableCars[0]?.files);
+      
+      setAllCars(availableCars);
       setCars(availableCars);
       
       // Обновляем статистику
@@ -54,21 +62,45 @@ export default function Home() {
     loadCars();
   }, []);
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      const now = new Date().getTime();
-      const distance = stats.saleEndDate.getTime() - now;
+  const applyFilters = () => {
+    let filtered = [...allCars];
 
-      setTimeLeft({
-        days: Math.floor(distance / (1000 * 60 * 60 * 24)),
-        hours: Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
-        minutes: Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
-        seconds: Math.floor((distance % (1000 * 60)) / 1000)
-      });
-    }, 1000);
+    if (filters.search) {
+      const search = filters.search.toLowerCase();
+      filtered = filtered.filter(car => 
+        car.brand.toLowerCase().includes(search) || 
+        car.model.toLowerCase().includes(search)
+      );
+    }
 
-    return () => clearInterval(timer);
-  }, []);
+    if (filters.maxPrice) {
+      filtered = filtered.filter(car => car.price <= filters.maxPrice!);
+    }
+
+    if (filters.gearbox) {
+      filtered = filtered.filter(car => car.gearbox.includes(filters.gearbox!));
+    }
+
+    if (filters.fuel) {
+      filtered = filtered.filter(car => car.fuel === filters.fuel);
+    }
+
+    setCars(filtered);
+    setCurrentIndex(0);
+    setShowFilters(false);
+    
+    // Scroll to top
+    containerRef.current?.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const clearFilters = () => {
+    setFilters({});
+    setCars(allCars);
+    setCurrentIndex(0);
+    setShowFilters(false);
+    containerRef.current?.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
 
   // Scroll handler для TikTok-style навигации
   useEffect(() => {
@@ -162,7 +194,7 @@ export default function Home() {
 
   return (
     <div className={styles.app}>
-      {/* Фиксированный Header с акцией и таймером */}
+      {/* Фиксированный Header с фильтрами */}
       <motion.div 
         className={styles.header}
         initial={{ y: -100, opacity: 0 }}
@@ -173,18 +205,97 @@ export default function Home() {
           <div className={styles.headerLeft}>
             <div className={styles.badge}>РАСПРОДАЖА СКЛАДА</div>
             <div className={styles.stockInfo}>
-              Осталось <span className={styles.highlight}>{stats.remainingCars}</span> из {stats.totalCars}
+              Найдено <span className={styles.highlight}>{cars.length}</span> авто
             </div>
           </div>
-          <div className={styles.headerTimer}>
-            <div className={styles.timerCompact}>
-              <span className={styles.timerValue}>{timeLeft.days.toString().padStart(2, '0')}</span>:
-              <span className={styles.timerValue}>{timeLeft.hours.toString().padStart(2, '0')}</span>:
-              <span className={styles.timerValue}>{timeLeft.minutes.toString().padStart(2, '0')}</span>
-            </div>
-          </div>
+          <button 
+            className={filterStyles.filterButton}
+            onClick={() => setShowFilters(!showFilters)}
+          >
+            🔍 Фильтры
+          </button>
         </div>
       </motion.div>
+
+      {/* Панель фильтров */}
+      <AnimatePresence>
+        {showFilters && (
+          <motion.div 
+            className={filterStyles.filterPanel}
+            initial={{ y: -300, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: -300, opacity: 0 }}
+            transition={{ duration: 0.4 }}
+          >
+            <div className={filterStyles.filterContent}>
+              <div className={filterStyles.filterRow}>
+                <div className={filterStyles.filterGroup}>
+                  <label>Марка/Модель</label>
+                  <input 
+                    type="text" 
+                    placeholder="BMW X5..."
+                    value={filters.search || ''}
+                    onChange={(e) => setFilters({...filters, search: e.target.value})}
+                    className={filterStyles.filterInput}
+                  />
+                </div>
+
+                <div className={filterStyles.filterGroup}>
+                  <label>Цена до (₽)</label>
+                  <input 
+                    type="number" 
+                    placeholder="10000000"
+                    value={filters.maxPrice || ''}
+                    onChange={(e) => setFilters({...filters, maxPrice: e.target.value ? parseInt(e.target.value) : undefined})}
+                    className={filterStyles.filterInput}
+                  />
+                </div>
+              </div>
+
+              <div className={filterStyles.filterRow}>
+                <div className={filterStyles.filterGroup}>
+                  <label>Коробка</label>
+                  <select 
+                    value={filters.gearbox || ''}
+                    onChange={(e) => setFilters({...filters, gearbox: e.target.value || undefined})}
+                    className={filterStyles.filterSelect}
+                  >
+                    <option value="">Все</option>
+                    <option value="Автомат">Автомат</option>
+                    <option value="Механика">Механика</option>
+                    <option value="Робот">Робот</option>
+                    <option value="Вариатор">Вариатор</option>
+                  </select>
+                </div>
+
+                <div className={filterStyles.filterGroup}>
+                  <label>Топливо</label>
+                  <select 
+                    value={filters.fuel || ''}
+                    onChange={(e) => setFilters({...filters, fuel: e.target.value || undefined})}
+                    className={filterStyles.filterSelect}
+                  >
+                    <option value="">Все</option>
+                    <option value="Бензин">Бензин</option>
+                    <option value="Дизель">Дизель</option>
+                    <option value="Гибрид">Гибрид</option>
+                    <option value="Электро">Электро</option>
+                  </select>
+                </div>
+              </div>
+
+              <div className={filterStyles.filterActions}>
+                <button onClick={applyFilters} className={filterStyles.applyButton}>
+                  Применить
+                </button>
+                <button onClick={clearFilters} className={filterStyles.clearButton}>
+                  Сбросить
+                </button>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Вертикальная лента карточек */}
       <div className={styles.scrollContainer} ref={containerRef}>
