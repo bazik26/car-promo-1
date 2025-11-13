@@ -1,0 +1,506 @@
+.app {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+  background: #000000;
+}
+
+/* Фиксированный Header */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 12px 20px;
+}
+
+.headerContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 100%;
+}
+
+.headerLeft {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.badge {
+  background: linear-gradient(135deg, #00F5FF, #B026FF);
+  color: #000000;
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.stockInfo {
+  font-size: 12px;
+  color: #FFFFFF;
+  font-weight: 500;
+}
+
+.highlight {
+  color: #00F5FF;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.headerTimer {
+  display: flex;
+  align-items: center;
+}
+
+.timerCompact {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #00F5FF;
+  font-variant-numeric: tabular-nums;
+}
+
+.timerValue {
+  color: #00F5FF;
+}
+
+/* Контейнер для вертикальной прокрутки */
+.scrollContainer {
+  width: 100vw;
+  height: 100vh;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+.scrollContainer::-webkit-scrollbar {
+  display: none;
+}
+
+/* Каждый слайд - на весь экран */
+.slide {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+/* Фоновое изображение */
+.slideBackground {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: brightness(0.7);
+}
+
+/* Градиентный оверлей для читаемости */
+.slideOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.2) 0%,
+    rgba(0, 0, 0, 0.6) 50%,
+    rgba(0, 0, 0, 0.9) 100%
+  );
+}
+
+/* Контент слайда */
+.slideContent {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 80px 24px 100px;
+}
+
+/* Основная информация слева-внизу */
+.mainInfo {
+  flex: 1;
+  max-width: 600px;
+}
+
+.carTags {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.tag {
+  background: rgba(0, 245, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 245, 255, 0.3);
+  color: #00F5FF;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.carBrand {
+  font-size: clamp(18px, 3vw, 24px);
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 4px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.carModel {
+  font-size: clamp(32px, 6vw, 56px);
+  font-weight: 800;
+  color: #FFFFFF;
+  margin-bottom: 24px;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Блок цены */
+.priceBlock {
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 20px 24px;
+  margin-bottom: 24px;
+  max-width: 400px;
+}
+
+.oldPrice {
+  font-size: 14px;
+  text-decoration: line-through;
+  color: rgba(255, 255, 255, 0.4);
+  margin-bottom: 6px;
+}
+
+.newPrice {
+  font-size: clamp(32px, 5vw, 42px);
+  font-weight: 800;
+  background: linear-gradient(135deg, #FFFFFF, #00F5FF);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 8px;
+  line-height: 1;
+}
+
+.saveAmount {
+  font-size: 13px;
+  color: #39FF14;
+  font-weight: 600;
+}
+
+/* CTA кнопка */
+.ctaButton {
+  display: inline-block;
+  padding: 18px 48px;
+  background: linear-gradient(135deg, #00F5FF, #00D4E0);
+  color: #000000;
+  text-decoration: none;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 24px rgba(0, 245, 255, 0.4);
+}
+
+.ctaButton:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 32px rgba(0, 245, 255, 0.6);
+}
+
+/* Боковая панель с иконками (TikTok style) */
+.sidePanel {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  padding-right: 8px;
+}
+
+.feature {
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 16px 12px;
+  text-align: center;
+  min-width: 90px;
+  transition: all 0.3s ease;
+}
+
+.feature:hover {
+  transform: scale(1.1);
+  border-color: rgba(0, 245, 255, 0.5);
+  box-shadow: 0 8px 24px rgba(0, 245, 255, 0.3);
+}
+
+.featureIcon {
+  font-size: 28px;
+  margin-bottom: 8px;
+  filter: drop-shadow(0 2px 8px rgba(0, 245, 255, 0.5));
+}
+
+.featureValue {
+  font-size: 16px;
+  font-weight: 700;
+  color: #FFFFFF;
+  margin-bottom: 4px;
+  line-height: 1;
+}
+
+.featureLabel {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 600;
+}
+
+/* Скидочный бейдж (как в TikTok правый верхний) */
+.discountBadge {
+  position: absolute;
+  top: 80px;
+  right: 24px;
+  background: linear-gradient(135deg, #FF006E, #FF4D4D);
+  color: #FFFFFF;
+  padding: 16px 20px;
+  border-radius: 50%;
+  font-weight: 900;
+  font-size: 20px;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 24px rgba(255, 0, 110, 0.5);
+  animation: glow-pulse 2s ease-in-out infinite;
+  z-index: 10;
+}
+
+/* Индикатор прогресса (точки) */
+.progressIndicator {
+  position: absolute;
+  left: 50%;
+  bottom: 40px;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 10;
+}
+
+.progressDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.progressDotActive {
+  background: #00F5FF;
+  width: 32px;
+  border-radius: 4px;
+  box-shadow: 0 0 16px rgba(0, 245, 255, 0.6);
+}
+
+/* Навигационные кнопки */
+.navButton {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 48px;
+  height: 48px;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  color: #00F5FF;
+  font-size: 24px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navButton:hover {
+  background: rgba(0, 245, 255, 0.2);
+  border-color: #00F5FF;
+  transform: translateX(-50%) scale(1.1);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .headerContent {
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
+  }
+
+  .headerLeft {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .headerTimer {
+    align-self: flex-end;
+  }
+
+  .slideContent {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 80px 20px 120px;
+    gap: 24px;
+  }
+
+  .sidePanel {
+    flex-direction: row;
+    width: 100%;
+    overflow-x: auto;
+    padding-right: 0;
+    padding-bottom: 20px;
+    gap: 12px;
+  }
+
+  .sidePanel::-webkit-scrollbar {
+    display: none;
+  }
+
+  .feature {
+    min-width: 80px;
+    padding: 12px 10px;
+  }
+
+  .featureIcon {
+    font-size: 24px;
+  }
+
+  .featureValue {
+    font-size: 14px;
+  }
+
+  .mainInfo {
+    max-width: 100%;
+  }
+
+  .priceBlock {
+    max-width: 100%;
+  }
+
+  .ctaButton {
+    width: 100%;
+    text-align: center;
+  }
+
+  .discountBadge {
+    width: 60px;
+    height: 60px;
+    font-size: 16px;
+    top: 70px;
+    right: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    padding: 10px 16px;
+  }
+
+  .badge {
+    font-size: 10px;
+    padding: 5px 12px;
+  }
+
+  .stockInfo {
+    font-size: 11px;
+  }
+
+  .highlight {
+    font-size: 14px;
+  }
+
+  .timerCompact {
+    font-size: 12px;
+  }
+
+  .carBrand {
+    font-size: 16px;
+  }
+
+  .carModel {
+    font-size: clamp(28px, 8vw, 40px);
+  }
+
+  .slideContent {
+    padding: 70px 16px 100px;
+  }
+
+  .priceBlock {
+    padding: 16px 20px;
+  }
+
+  .newPrice {
+    font-size: clamp(28px, 7vw, 36px);
+  }
+
+  .ctaButton {
+    padding: 16px 32px;
+    font-size: 13px;
+  }
+
+  .feature {
+    min-width: 70px;
+    padding: 10px 8px;
+  }
+
+  .featureIcon {
+    font-size: 20px;
+  }
+
+  .featureValue {
+    font-size: 12px;
+  }
+
+  .featureLabel {
+    font-size: 9px;
+  }
+}
+
+/* Анимации */
+@keyframes glow-pulse {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(255, 0, 110, 0.3),
+                0 0 40px rgba(255, 0, 110, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(255, 0, 110, 0.5),
+                0 0 60px rgba(255, 0, 110, 0.3);
+  }
+}
+
