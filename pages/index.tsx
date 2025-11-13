@@ -52,7 +52,7 @@ export default function Home() {
             transition={{ delay: 0.2, duration: 0.6 }}
             className={styles.badge}
           >
-            🔥 СУПЕР РАСПРОДАЖА
+            ЭКСКЛЮЗИВНАЯ РАСПРОДАЖА
           </motion.div>
 
           <motion.h1
@@ -61,9 +61,9 @@ export default function Home() {
             transition={{ delay: 0.4, duration: 0.6 }}
             className={styles.title}
           >
-            АВТО СО СКЛАДА
+            ПРЕМИУМ АВТОМОБИЛИ
             <br />
-            <span className={styles.titleGradient}>ПО СУПЕРЦЕНАМ!</span>
+            <span className={styles.titleGradient}>СО СКЛАДА</span>
           </motion.h1>
 
           <motion.p
@@ -82,7 +82,7 @@ export default function Home() {
             transition={{ delay: 0.8, duration: 0.6 }}
             className={styles.timer}
           >
-            <div className={styles.timerLabel}>⏰ До конца акции осталось:</div>
+            <div className={styles.timerLabel}>До завершения предложения:</div>
             <div className={styles.timerBoxes}>
               <div className={styles.timerBox}>
                 <div className={styles.timerValue}>{timeLeft.days}</div>
@@ -167,7 +167,7 @@ export default function Home() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            🏆 УСПЕЙ КУПИТЬ! ОСТАЛОСЬ ВСЕГО {stats.remainingCars} АВТО
+            ОГРАНИЧЕННОЕ ПРЕДЛОЖЕНИЕ — {stats.remainingCars} АВТОМОБИЛЕЙ
           </motion.h2>
 
           <div className={styles.carsGrid}>
@@ -233,7 +233,7 @@ export default function Home() {
                   href={`tel:+79991234567`}
                   className={styles.carButton}
                 >
-                  📞 Позвонить
+                  Связаться
                 </a>
               </motion.div>
             ))}
@@ -252,11 +252,11 @@ export default function Home() {
         <div className="container">
           <div className={styles.ctaContent}>
             <h2 className={styles.ctaTitle}>
-              ⚡ НЕ УПУСТИ ШАНС!
+              ОГРАНИЧЕННОЕ ПРЕДЛОЖЕНИЕ
             </h2>
             <p className={styles.ctaText}>
-              Осталось всего {stats.remainingCars} автомобиля из {stats.totalCars}!<br />
-              Звони прямо сейчас и получи скидку до 30%!
+              Осталось {stats.remainingCars} автомобилей из {stats.totalCars}<br />
+              Свяжитесь с нашим специалистом для получения детальной информации
             </p>
             <motion.a
               href="tel:+79991234567"
@@ -264,10 +264,10 @@ export default function Home() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              📞 ПОЗВОНИТЬ СЕЙЧАС
+              СВЯЗАТЬСЯ С НАМИ
             </motion.a>
             <div className={styles.ctaNote}>
-              Работаем 24/7 • Быстрое оформление • Помощь с доставкой
+              Консультация • Оформление • Доставка
             </div>
           </div>
         </div>
@@ -276,9 +276,9 @@ export default function Home() {
       {/* Footer */}
       <footer className={styles.footer}>
         <div className="container">
-          <p>© 2025 АвтоПромо. Распродажа автомобилей со склада.</p>
+          <p>© 2025 Premium Motors. Эксклюзивная продажа премиум автомобилей.</p>
           <p className={styles.footerNote}>
-            ⚠️ Количество автомобилей ограничено. Акция действует до {stats.saleEndDate.toLocaleDateString('ru-RU')}.
+            Количество автомобилей ограничено. Предложение действительно до {stats.saleEndDate.toLocaleDateString('ru-RU')}.
           </p>
         </div>
       </footer>
