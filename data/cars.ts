@@ -29,7 +29,7 @@ export const promoCars: Car[] = [
     transmission: 'Автомат',
     fuel: 'Бензин',
     engine: '3.0L Turbo',
-    image: '/images/2025-11-13 21.01.17.jpg',
+    image: '/images/2025-11-13%2021.01.17.jpg',
     tags: ['ХИТ ПРОДАЖ', 'M SPORT'],
     discount: 25,
     inStock: true
@@ -46,7 +46,7 @@ export const promoCars: Car[] = [
     transmission: 'Автомат 9G-Tronic',
     fuel: 'Бензин',
     engine: '2.0L Turbo',
-    image: '/images/2025-11-13 21.01.28.jpg',
+    image: '/images/2025-11-13%2021.01.28.jpg',
     tags: ['AMG LINE', 'COUPE'],
     discount: 21,
     inStock: true
@@ -63,7 +63,7 @@ export const promoCars: Car[] = [
     transmission: 'Автомат Tiptronic',
     fuel: 'Бензин',
     engine: '4.0L V8 Twin-Turbo',
-    image: '/images/2025-11-13 21.01.33.jpg',
+    image: '/images/2025-11-13%2021.01.33.jpg',
     tags: ['TURBO', 'ЭКСКЛЮЗИВ'],
     discount: 15,
     inStock: true
@@ -80,7 +80,7 @@ export const promoCars: Car[] = [
     transmission: 'Автомат Tiptronic',
     fuel: 'Бензин',
     engine: '3.0L TFSI V6',
-    image: '/images/2025-11-13 21.01.38.jpg',
+    image: '/images/2025-11-13%2021.01.38.jpg',
     tags: ['S-LINE', 'QUATTRO'],
     discount: 18,
     inStock: true
