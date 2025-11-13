@@ -115,106 +115,101 @@
   letter-spacing: 0.5px;
 }
 
-/* Timer - Glassmorphism */
+/* Timer - Minimalist Premium */
 .timer {
-  background: rgba(18, 18, 26, 0.6);
-  backdrop-filter: blur(40px) saturate(180%);
-  -webkit-backdrop-filter: blur(40px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 32px;
-  padding: 48px 40px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4),
-              inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  background: rgba(18, 18, 26, 0.4);
+  backdrop-filter: blur(60px) saturate(180%);
+  -webkit-backdrop-filter: blur(60px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 24px;
+  padding: 56px 48px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
   position: relative;
   overflow: hidden;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 .timer::before {
   content: '';
   position: absolute;
   top: 0;
-  left: -50%;
-  width: 200%;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, #00F5FF, transparent);
-  animation: shimmer 3s linear infinite;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
 }
 
 .timerLabel {
-  font-size: 14px;
-  font-weight: 600;
-  margin-bottom: 32px;
-  color: #A0A0B8;
+  font-size: 11px;
+  font-weight: 500;
+  margin-bottom: 40px;
+  color: rgba(255, 255, 255, 0.4);
   text-transform: uppercase;
-  letter-spacing: 3px;
+  letter-spacing: 4px;
+  text-align: center;
 }
 
 .timerBoxes {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
+  background: rgba(255, 255, 255, 0.03);
+  padding: 2px;
+  border-radius: 16px;
 }
 
 .timerBox {
-  background: linear-gradient(135deg, rgba(0, 245, 255, 0.1) 0%, rgba(176, 38, 255, 0.1) 100%);
+  background: rgba(10, 10, 15, 0.8);
   backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 24px;
-  padding: 24px 32px;
-  min-width: 110px;
+  border: none;
+  border-radius: 14px;
+  padding: 28px 20px;
+  min-width: 0;
   position: relative;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .timerBox::before {
   content: '';
   position: absolute;
-  inset: -2px;
-  background: linear-gradient(135deg, #00F5FF, #B026FF, #FF006E);
-  border-radius: 24px;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 14px;
   opacity: 0;
-  transition: opacity 0.4s;
-  z-index: -1;
+  transition: opacity 0.3s;
 }
 
 .timerBox:hover::before {
-  opacity: 0.5;
+  opacity: 1;
 }
 
 .timerBox:hover {
-  transform: translateY(-8px) scale(1.05);
-  box-shadow: 0 20px 40px rgba(0, 245, 255, 0.3);
+  background: rgba(18, 18, 26, 0.9);
 }
 
 .timerValue {
-  font-size: clamp(48px, 6vw, 64px);
-  font-weight: 700;
+  font-size: clamp(44px, 6vw, 56px);
+  font-weight: 300;
   line-height: 1;
-  margin-bottom: 8px;
-  background: linear-gradient(135deg, #FFFFFF 0%, #00F5FF 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  margin-bottom: 10px;
+  color: #FFFFFF;
+  letter-spacing: -0.02em;
 }
 
 .timerUnit {
-  font-size: 11px;
-  color: #A0A0B8;
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.35);
   text-transform: uppercase;
   letter-spacing: 2px;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .timerSeparator {
-  font-size: 40px;
-  font-weight: 300;
-  color: #00F5FF;
-  opacity: 0.5;
+  display: none;
 }
 
-/* Stats Section - 3D Cards */
+/* Stats Section - Minimal Grid */
 .stats {
   padding: 120px 24px;
   position: relative;
@@ -223,72 +218,75 @@
 
 .statsGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 32px;
-  max-width: 1400px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  max-width: 1200px;
   margin: 0 auto;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 24px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .statCard {
-  background: rgba(18, 18, 26, 0.6);
+  background: rgba(10, 10, 15, 0.8);
   backdrop-filter: blur(40px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 32px;
-  padding: 56px 40px;
+  border: none;
+  border-radius: 0;
+  padding: 64px 40px;
   text-align: center;
   position: relative;
-  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .statCard::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(0, 245, 255, 0.05), rgba(176, 38, 255, 0.05));
+  background: rgba(255, 255, 255, 0.02);
   opacity: 0;
-  transition: opacity 0.5s;
-}
-
-.statCard:hover {
-  transform: translateY(-16px) rotateX(5deg);
-  border-color: rgba(0, 245, 255, 0.3);
-  box-shadow: 0 32px 64px rgba(0, 0, 0, 0.5),
-              0 0 60px rgba(0, 245, 255, 0.2);
+  transition: opacity 0.4s;
 }
 
 .statCard:hover::before {
   opacity: 1;
 }
 
+.statCard:hover {
+  background: rgba(18, 18, 26, 0.9);
+  transform: scale(1.02);
+}
+
 .statCardPrimary {
-  background: linear-gradient(135deg, rgba(0, 245, 255, 0.15) 0%, rgba(176, 38, 255, 0.15) 100%);
-  border: 1px solid rgba(0, 245, 255, 0.3);
-  box-shadow: 0 8px 32px rgba(0, 245, 255, 0.2),
-              inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  background: rgba(18, 18, 26, 0.9);
+  position: relative;
 }
 
 .statCardPrimary::after {
   content: '';
   position: absolute;
-  inset: -100px;
-  background: conic-gradient(from 180deg at 50% 50%, #00F5FF 0deg, #B026FF 180deg, #FF006E 360deg);
-  animation: rotate-gradient 6s linear infinite;
-  opacity: 0.1;
-  filter: blur(40px);
+  inset: 0;
+  background: linear-gradient(135deg, rgba(0, 245, 255, 0.05) 0%, rgba(176, 38, 255, 0.05) 100%);
+  pointer-events: none;
 }
 
 .statIcon {
-  font-size: 56px;
+  font-size: 40px;
   margin-bottom: 24px;
-  filter: drop-shadow(0 0 20px rgba(0, 245, 255, 0.5));
+  opacity: 0.6;
+  filter: grayscale(100%);
 }
 
 .statValue {
-  font-size: clamp(56px, 8vw, 80px);
-  font-weight: 700;
+  font-size: clamp(56px, 8vw, 72px);
+  font-weight: 300;
   line-height: 1;
   margin-bottom: 16px;
+  color: #FFFFFF;
+  letter-spacing: -0.03em;
+}
+
+.statCardPrimary .statValue {
   background: linear-gradient(135deg, #FFFFFF 0%, #00F5FF 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -296,11 +294,11 @@
 }
 
 .statLabel {
-  font-size: 14px;
-  color: #A0A0B8;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.4);
   text-transform: uppercase;
-  letter-spacing: 2px;
-  font-weight: 600;
+  letter-spacing: 3px;
+  font-weight: 500;
 }
 
 /* Cars Section */
@@ -656,20 +654,16 @@
   }
   
   .timer {
-    padding: 32px 24px;
+    padding: 40px 24px;
   }
 
   .timerBoxes {
-    gap: 12px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2px;
   }
 
   .timerBox {
-    min-width: 90px;
-    padding: 18px 24px;
-  }
-
-  .timerSeparator {
-    font-size: 32px;
+    padding: 24px 16px;
   }
 
   .carsGrid {
@@ -679,7 +673,11 @@
 
   .statsGrid {
     grid-template-columns: 1fr;
-    gap: 24px;
+    gap: 1px;
+  }
+
+  .statCard {
+    padding: 48px 32px;
   }
 
   .ctaContent {
@@ -688,9 +686,20 @@
 }
 
 @media (max-width: 480px) {
+  .timer {
+    padding: 32px 20px;
+  }
+
+  .timerBoxes {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
   .timerBox {
-    min-width: 75px;
-    padding: 14px 18px;
+    padding: 20px 12px;
+  }
+
+  .timerValue {
+    font-size: clamp(36px, 10vw, 44px);
   }
 
   .carCard {
@@ -709,5 +718,9 @@
   .ctaButton {
     padding: 20px 48px;
     font-size: 15px;
+  }
+
+  .statCard {
+    padding: 40px 24px;
   }
 }

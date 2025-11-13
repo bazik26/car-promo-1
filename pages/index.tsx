@@ -86,23 +86,20 @@ export default function Home() {
             <div className={styles.timerLabel}>ПРЕДЛОЖЕНИЕ ИСТЕКАЕТ ЧЕРЕЗ</div>
             <div className={styles.timerBoxes}>
               <div className={styles.timerBox}>
-                <div className={styles.timerValue}>{timeLeft.days}</div>
-                <div className={styles.timerUnit}>дней</div>
+                <div className={styles.timerValue}>{timeLeft.days.toString().padStart(2, '0')}</div>
+                <div className={styles.timerUnit}>ДНЕЙ</div>
               </div>
-              <div className={styles.timerSeparator}>:</div>
               <div className={styles.timerBox}>
-                <div className={styles.timerValue}>{timeLeft.hours}</div>
-                <div className={styles.timerUnit}>часов</div>
+                <div className={styles.timerValue}>{timeLeft.hours.toString().padStart(2, '0')}</div>
+                <div className={styles.timerUnit}>ЧАСОВ</div>
               </div>
-              <div className={styles.timerSeparator}>:</div>
               <div className={styles.timerBox}>
-                <div className={styles.timerValue}>{timeLeft.minutes}</div>
-                <div className={styles.timerUnit}>минут</div>
+                <div className={styles.timerValue}>{timeLeft.minutes.toString().padStart(2, '0')}</div>
+                <div className={styles.timerUnit}>МИНУТ</div>
               </div>
-              <div className={styles.timerSeparator}>:</div>
               <div className={styles.timerBox}>
-                <div className={styles.timerValue}>{timeLeft.seconds}</div>
-                <div className={styles.timerUnit}>секунд</div>
+                <div className={styles.timerValue}>{timeLeft.seconds.toString().padStart(2, '0')}</div>
+                <div className={styles.timerUnit}>СЕКУНД</div>
               </div>
             </div>
           </motion.div>
@@ -115,44 +112,41 @@ export default function Home() {
           <div className={styles.statsGrid}>
             <motion.div
               className={styles.statCard}
-              initial={{ scale: 0 }}
-              whileInView={{ scale: 1 }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
+              transition={{ duration: 0.6 }}
             >
-              <div className={styles.statIcon}>🚗</div>
               <div className={styles.statValue}>
                 <CountUp end={stats.totalCars} duration={2} />
               </div>
-              <div className={styles.statLabel}>Машин на складе</div>
+              <div className={styles.statLabel}>ВСЕГО НА СКЛАДЕ</div>
             </motion.div>
 
             <motion.div
               className={`${styles.statCard} ${styles.statCardPrimary}`}
-              initial={{ scale: 0 }}
-              whileInView={{ scale: 1 }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.1 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
             >
-              <div className={styles.statIcon}>⚡</div>
               <div className={styles.statValue}>
                 <CountUp end={stats.remainingCars} duration={2} />
               </div>
-              <div className={styles.statLabel}>Осталось в наличии!</div>
+              <div className={styles.statLabel}>В НАЛИЧИИ</div>
             </motion.div>
 
             <motion.div
               className={styles.statCard}
-              initial={{ scale: 0 }}
-              whileInView={{ scale: 1 }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.2 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
             >
-              <div className={styles.statIcon}>✅</div>
               <div className={styles.statValue}>
                 <CountUp end={stats.soldCars} duration={2} />
               </div>
-              <div className={styles.statLabel}>Уже продано</div>
+              <div className={styles.statLabel}>ПРОДАНО</div>
             </motion.div>
           </div>
         </div>
