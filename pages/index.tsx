@@ -3,8 +3,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import CountUp from 'react-countup';
 import { getCars, getFileUrl, Car as ApiCar } from '@/lib/api';
 import PhotoGallery from '@/components/PhotoGallery';
+import FullscreenGallery from '@/components/FullscreenGallery';
 import styles from '@/styles/TikTok.module.css';
-import filterStyles from '@/styles/Filters.module.css';
 
 interface Stats {
   totalCars: number;
@@ -23,14 +23,8 @@ export default function Home() {
   });
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
-  const [showFilters, setShowFilters] = useState(false);
-  const [filters, setFilters] = useState<{
-    search?: string;
-    maxPrice?: number;
-    gearbox?: string;
-    fuel?: string;
-  }>({});
-  const [allCars, setAllCars] = useState<ApiCar[]>([]);
+  const [showFullscreen, setShowFullscreen] = useState(false);
+  const [fullscreenCarIndex, setFullscreenCarIndex] = useState(0);
 
   const containerRef = useRef<HTMLDivElement>(null);
   const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -45,7 +39,6 @@ export default function Home() {
       console.log('Loaded cars:', availableCars.length);
       console.log('First car files:', availableCars[0]?.files);
       
-      setAllCars(availableCars);
       setCars(availableCars);
       
       // Обновляем статистику
@@ -62,43 +55,9 @@ export default function Home() {
     loadCars();
   }, []);
 
-  const applyFilters = () => {
-    let filtered = [...allCars];
-
-    if (filters.search) {
-      const search = filters.search.toLowerCase();
-      filtered = filtered.filter(car => 
-        car.brand.toLowerCase().includes(search) || 
-        car.model.toLowerCase().includes(search)
-      );
-    }
-
-    if (filters.maxPrice) {
-      filtered = filtered.filter(car => car.price <= filters.maxPrice!);
-    }
-
-    if (filters.gearbox) {
-      filtered = filtered.filter(car => car.gearbox.includes(filters.gearbox!));
-    }
-
-    if (filters.fuel) {
-      filtered = filtered.filter(car => car.fuel === filters.fuel);
-    }
-
-    setCars(filtered);
-    setCurrentIndex(0);
-    setShowFilters(false);
-    
-    // Scroll to top
-    containerRef.current?.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
-  const clearFilters = () => {
-    setFilters({});
-    setCars(allCars);
-    setCurrentIndex(0);
-    setShowFilters(false);
-    containerRef.current?.scrollTo({ top: 0, behavior: 'smooth' });
+  const openFullscreenGallery = (carIndex: number) => {
+    setFullscreenCarIndex(carIndex);
+    setShowFullscreen(true);
   };
 
 
@@ -194,7 +153,7 @@ export default function Home() {
 
   return (
     <div className={styles.app}>
-      {/* Компактный Header с инлайн-фильтрами */}
+      {/* Простой Header */}
       <motion.div 
         className={styles.header}
         initial={{ y: -100, opacity: 0 }}
@@ -204,50 +163,8 @@ export default function Home() {
         <div className={styles.headerTop}>
           <div className={styles.badge}>РАСПРОДАЖА СКЛАДА</div>
           <div className={styles.stockInfo}>
-            Найдено <span className={styles.highlight}>{cars.length}</span> авто
+            Доступно <span className={styles.highlight}>{cars.length}</span> авто
           </div>
-        </div>
-        
-        <div className={styles.headerFilters}>
-          <input 
-            type="text" 
-            placeholder="Марка/модель..."
-            value={filters.search || ''}
-            onChange={(e) => setFilters({...filters, search: e.target.value})}
-            onKeyDown={(e) => e.key === 'Enter' && applyFilters()}
-            className={styles.filterInputCompact}
-          />
-          
-          <select 
-            value={filters.gearbox || ''}
-            onChange={(e) => setFilters({...filters, gearbox: e.target.value || undefined})}
-            className={styles.filterSelectCompact}
-          >
-            <option value="">КПП</option>
-            <option value="Автомат">Автомат</option>
-            <option value="Механика">Механика</option>
-          </select>
-
-          <select 
-            value={filters.fuel || ''}
-            onChange={(e) => setFilters({...filters, fuel: e.target.value || undefined})}
-            className={styles.filterSelectCompact}
-          >
-            <option value="">Топливо</option>
-            <option value="Бензин">Бензин</option>
-            <option value="Дизель">Дизель</option>
-            <option value="Гибрид">Гибрид</option>
-          </select>
-
-          <button onClick={applyFilters} className={styles.applyButtonCompact}>
-            ✓
-          </button>
-          
-          {(filters.search || filters.gearbox || filters.fuel || filters.maxPrice) && (
-            <button onClick={clearFilters} className={styles.clearButtonCompact}>
-              ✕
-            </button>
-          )}
         </div>
       </motion.div>
 
@@ -289,9 +206,18 @@ export default function Home() {
                     </div>
                   </div>
 
-                  <a href="tel:+79991234567" className={styles.ctaButton}>
-                    УЗНАТЬ ЦЕНУ ПОД КЛЮЧ
-                  </a>
+                  <div className={styles.actionButtons}>
+                    <button 
+                      onClick={() => openFullscreenGallery(index)}
+                      className={styles.viewPhotosButton}
+                    >
+                      📸 ВСЕ ФОТО ({car.files.length})
+                    </button>
+                    
+                    <a href="tel:+79991234567" className={styles.ctaButton}>
+                      УЗНАТЬ ЦЕНУ ПОД КЛЮЧ
+                    </a>
+                  </div>
               </div>
 
               {/* Правая сторона - иконки характеристик (TikTok style) */}
@@ -370,6 +296,16 @@ export default function Home() {
           ↓
         </button>
       )}
+
+      {/* Fullscreen Gallery */}
+      <AnimatePresence>
+        {showFullscreen && (
+          <FullscreenGallery 
+            car={cars[fullscreenCarIndex]} 
+            onClose={() => setShowFullscreen(false)}
+          />
+        )}
+      </AnimatePresence>
     </div>
   );
 }
