@@ -52,7 +52,7 @@ export default function Home() {
             transition={{ delay: 0.2, duration: 0.6 }}
             className={styles.badge}
           >
-            ЭКСКЛЮЗИВНАЯ РАСПРОДАЖА
+            🔥 МЕГА РАСПРОДАЖА
           </motion.div>
 
           <motion.h1
@@ -61,9 +61,10 @@ export default function Home() {
             transition={{ delay: 0.4, duration: 0.6 }}
             className={styles.title}
           >
-            ПРЕМИУМ АВТОМОБИЛИ
-            <br />
-            <span className={styles.titleGradient}>СО СКЛАДА</span>
+            АВТО ИЗ ЕВРОПЫ
+            <span className={styles.titleGradient}>
+              СО СКИДКАМИ ДО 30%
+            </span>
           </motion.h1>
 
           <motion.p
@@ -72,7 +73,7 @@ export default function Home() {
             transition={{ delay: 0.6, duration: 0.6 }}
             className={styles.subtitle}
           >
-            Растаможены • Готовы к выдаче • Из Европы и Азии
+            ✅ Растаможены ✅ Готовы к выдаче ✅ Осталось 24 из 67!
           </motion.p>
 
           {/* Timer */}
@@ -82,7 +83,7 @@ export default function Home() {
             transition={{ delay: 0.8, duration: 0.6 }}
             className={styles.timer}
           >
-            <div className={styles.timerLabel}>До завершения предложения:</div>
+            <div className={styles.timerLabel}>⏰ АКЦИЯ ЗАКАНЧИВАЕТСЯ ЧЕРЕЗ:</div>
             <div className={styles.timerBoxes}>
               <div className={styles.timerBox}>
                 <div className={styles.timerValue}>{timeLeft.days}</div>
@@ -167,7 +168,7 @@ export default function Home() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            ОГРАНИЧЕННОЕ ПРЕДЛОЖЕНИЕ — {stats.remainingCars} АВТОМОБИЛЕЙ
+            🔥 УСПЕЙ КУПИТЬ! ОСТАЛОСЬ {stats.remainingCars} АВТО! 🔥
           </motion.h2>
 
           <div className={styles.carsGrid}>
@@ -233,7 +234,7 @@ export default function Home() {
                   href={`tel:+79991234567`}
                   className={styles.carButton}
                 >
-                  Связаться
+                  📞 ПОЗВОНИТЬ СЕЙЧАС
                 </a>
               </motion.div>
             ))}
@@ -252,11 +253,11 @@ export default function Home() {
         <div className="container">
           <div className={styles.ctaContent}>
             <h2 className={styles.ctaTitle}>
-              ОГРАНИЧЕННОЕ ПРЕДЛОЖЕНИЕ
+              ⚡ НЕ УПУСТИ ШАНС! ⚡
             </h2>
             <p className={styles.ctaText}>
-              Осталось {stats.remainingCars} автомобилей из {stats.totalCars}<br />
-              Свяжитесь с нашим специалистом для получения детальной информации
+              Осталось всего {stats.remainingCars} автомобилей из {stats.totalCars}!<br />
+              Звони прямо сейчас и получи МАКСИМАЛЬНУЮ СКИДКУ! 🎁
             </p>
             <motion.a
               href="tel:+79991234567"
@@ -264,10 +265,10 @@ export default function Home() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              СВЯЗАТЬСЯ С НАМИ
+              📞 ПОЗВОНИТЬ ПРЯМО СЕЙЧАС
             </motion.a>
             <div className={styles.ctaNote}>
-              Консультация • Оформление • Доставка
+              ⚡ Работаем 24/7 • 🚚 Бесплатная доставка • 💯 100% гарантия
             </div>
           </div>
         </div>
@@ -276,9 +277,9 @@ export default function Home() {
       {/* Footer */}
       <footer className={styles.footer}>
         <div className="container">
-          <p>© 2025 Premium Motors. Эксклюзивная продажа премиум автомобилей.</p>
+          <p>© 2025 АвтоМакс — Лучшие цены на автомобили из Европы и Азии!</p>
           <p className={styles.footerNote}>
-            Количество автомобилей ограничено. Предложение действительно до {stats.saleEndDate.toLocaleDateString('ru-RU')}.
+            ⚠️ ВНИМАНИЕ! Количество автомобилей ограничено! Акция действует до {stats.saleEndDate.toLocaleDateString('ru-RU')}. Успей купить! 🔥
           </p>
         </div>
       </footer>

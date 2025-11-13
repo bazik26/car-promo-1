@@ -1,5 +1,6 @@
 .page {
   min-height: 100vh;
+  background: #F5F5F7;
 }
 
 /* Hero Section */
@@ -8,23 +9,42 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(180deg, #000000 0%, #0a0a0a 50%, #1a1a1a 100%);
+  background: linear-gradient(135deg, #4361EE 0%, #7209B7 50%, #FF4D4D 100%);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
   position: relative;
   overflow: hidden;
   padding: 40px 20px;
 }
 
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
 .hero::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: 
-    radial-gradient(ellipse at 50% 0%, rgba(212, 175, 55, 0.15) 0%, transparent 50%),
-    repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(212, 175, 55, 0.03) 2px, rgba(212, 175, 55, 0.03) 4px);
-  opacity: 0.5;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, transparent 70%);
+  border-radius: 50%;
+  top: -200px;
+  right: -200px;
+  animation: float 6s ease-in-out infinite;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, transparent 70%);
+  border-radius: 50%;
+  bottom: -150px;
+  left: -150px;
+  animation: float 8s ease-in-out infinite reverse;
 }
 
 .heroContent {
@@ -36,64 +56,61 @@
 
 .badge {
   display: inline-block;
-  background: linear-gradient(135deg, #d4af37 0%, #c9a961 100%);
-  color: #000000;
-  padding: 10px 30px;
-  border-radius: 2px;
-  font-weight: 700;
-  font-size: 12px;
-  letter-spacing: 3px;
+  background: #FFB800;
+  color: #1D1D1F;
+  padding: 12px 32px;
+  border-radius: 50px;
+  font-weight: 800;
+  font-size: 14px;
+  letter-spacing: 1px;
   text-transform: uppercase;
-  margin-bottom: 40px;
-  box-shadow: 0 4px 20px rgba(212, 175, 55, 0.3);
-  border: 1px solid rgba(212, 175, 55, 0.5);
+  margin-bottom: 30px;
+  box-shadow: 0 8px 24px rgba(255, 184, 0, 0.4);
+  animation: bounce 2s infinite;
 }
 
 .title {
-  font-size: clamp(42px, 8vw, 90px);
-  font-weight: 300;
-  line-height: 1.1;
-  margin-bottom: 30px;
-  letter-spacing: -2px;
-  text-transform: uppercase;
-  color: #ffffff;
+  font-size: clamp(48px, 10vw, 96px);
+  font-weight: 900;
+  line-height: 1;
+  margin-bottom: 25px;
+  color: #FFFFFF;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
 .titleGradient {
-  background: linear-gradient(135deg, #d4af37 0%, #f4d58d 50%, #c9a961 100%);
+  display: block;
+  background: linear-gradient(135deg, #FFB800 0%, #FF8E53 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  display: inline-block;
-  font-weight: 500;
+  animation: shimmer 3s infinite linear;
+  background-size: 1000px 100%;
 }
 
 .subtitle {
-  font-size: clamp(14px, 2.5vw, 18px);
-  font-weight: 400;
-  color: #b8b8b8;
+  font-size: clamp(18px, 3vw, 26px);
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.95);
   margin-bottom: 50px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
 }
 
 /* Timer */
 .timer {
-  background: rgba(26, 26, 26, 0.6);
+  background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(20px);
-  border-radius: 4px;
+  border-radius: 24px;
   padding: 40px 30px;
-  border: 1px solid rgba(212, 175, 55, 0.2);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
 }
 
 .timerLabel {
-  font-size: 14px;
-  font-weight: 600;
+  font-size: 16px;
+  font-weight: 700;
   margin-bottom: 25px;
-  letter-spacing: 2px;
+  color: #1D1D1F;
   text-transform: uppercase;
-  color: #b8b8b8;
+  letter-spacing: 1px;
 }
 
 .timerBoxes {
@@ -105,307 +122,274 @@
 }
 
 .timerBox {
-  background: rgba(0, 0, 0, 0.5);
-  border-radius: 2px;
+  background: linear-gradient(135deg, #FF4D4D 0%, #FF8E53 100%);
+  border-radius: 16px;
   padding: 20px 25px;
-  min-width: 90px;
-  border: 1px solid rgba(212, 175, 55, 0.3);
-  transition: all 0.3s ease;
+  min-width: 100px;
+  box-shadow: 0 8px 24px rgba(255, 77, 77, 0.4);
+  transition: transform 0.3s ease;
 }
 
 .timerBox:hover {
-  border-color: rgba(212, 175, 55, 0.6);
-  transform: translateY(-2px);
+  transform: translateY(-5px) scale(1.05);
 }
 
 .timerValue {
-  font-size: clamp(36px, 5vw, 52px);
-  font-weight: 200;
+  font-size: clamp(42px, 6vw, 56px);
+  font-weight: 900;
   line-height: 1;
   margin-bottom: 8px;
-  color: #d4af37;
+  color: #FFFFFF;
 }
 
 .timerUnit {
-  font-size: 11px;
-  color: #888888;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.9);
   text-transform: uppercase;
-  letter-spacing: 1.5px;
-  font-weight: 500;
+  letter-spacing: 1px;
+  font-weight: 600;
 }
 
 .timerSeparator {
-  font-size: 32px;
-  font-weight: 200;
-  color: #666666;
+  font-size: 36px;
+  font-weight: 900;
+  color: #FF4D4D;
 }
 
 /* Stats Section */
 .stats {
   padding: 80px 20px;
-  background: #0a0a0a;
-  border-top: 1px solid rgba(212, 175, 55, 0.1);
-  border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+  background: #FFFFFF;
 }
 
 .statsGrid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1px;
+  gap: 30px;
   max-width: 1200px;
   margin: 0 auto;
-  background: rgba(212, 175, 55, 0.1);
 }
 
 .statCard {
-  background: #000000;
+  background: linear-gradient(135deg, #F8F9FA 0%, #FFFFFF 100%);
+  border-radius: 24px;
   padding: 50px 30px;
   text-align: center;
-  transition: all 0.4s ease;
-  position: relative;
-}
-
-.statCard::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, #d4af37, transparent);
-  opacity: 0;
-  transition: opacity 0.4s ease;
-}
-
-.statCard:hover::before {
-  opacity: 1;
+  border: 2px solid #E8E8ED;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
 .statCard:hover {
-  background: #0a0a0a;
-  transform: translateY(-5px);
+  transform: translateY(-10px);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.15);
+  border-color: var(--primary);
 }
 
 .statCardPrimary {
-  background: linear-gradient(180deg, #1a1a1a 0%, #0a0a0a 100%);
-  border: 1px solid rgba(212, 175, 55, 0.3);
-  position: relative;
+  background: linear-gradient(135deg, #FF4D4D 0%, #FF8E53 100%);
+  border: none;
+  box-shadow: 0 12px 36px rgba(255, 77, 77, 0.4);
+  animation: pulse 2s infinite;
 }
 
-.statCardPrimary::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  border: 1px solid rgba(212, 175, 55, 0.2);
-  pointer-events: none;
+.statCardPrimary .statIcon {
+  filter: brightness(0) invert(1);
+}
+
+.statCardPrimary .statValue,
+.statCardPrimary .statLabel {
+  color: #FFFFFF;
 }
 
 .statIcon {
-  font-size: 42px;
+  font-size: 56px;
   margin-bottom: 20px;
-  filter: grayscale(30%);
 }
 
 .statValue {
-  font-size: clamp(44px, 6vw, 64px);
-  font-weight: 200;
+  font-size: clamp(48px, 7vw, 72px);
+  font-weight: 900;
   line-height: 1;
   margin-bottom: 12px;
-  color: #d4af37;
+  color: var(--primary);
 }
 
 .statLabel {
-  font-size: 13px;
-  color: #888888;
+  font-size: 16px;
+  color: #666666;
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 2px;
-  font-weight: 500;
+  letter-spacing: 0.5px;
 }
 
 /* Cars Section */
 .carsSection {
   padding: 100px 20px;
-  background: #000000;
+  background: #F5F5F7;
 }
 
 .sectionTitle {
   text-align: center;
-  font-size: clamp(24px, 4vw, 42px);
-  font-weight: 300;
-  margin-bottom: 80px;
-  letter-spacing: 1px;
+  font-size: clamp(32px, 6vw, 56px);
+  font-weight: 900;
+  margin-bottom: 70px;
+  background: linear-gradient(135deg, #FF4D4D 0%, #4361EE 50%, #7209B7 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   text-transform: uppercase;
-  color: #ffffff;
+  letter-spacing: -1px;
 }
 
 .carsGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 1px;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 30px;
   max-width: 1400px;
   margin: 0 auto;
-  background: rgba(212, 175, 55, 0.1);
 }
 
 /* Car Card */
 .carCard {
-  background: #0a0a0a;
-  padding: 35px 30px;
-  position: relative;
+  background: #FFFFFF;
+  border-radius: 24px;
+  padding: 0;
   overflow: hidden;
-  transition: all 0.4s ease;
+  transition: all 0.3s ease;
   cursor: pointer;
-  border: 1px solid transparent;
-}
-
-.carCard::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 2px;
-  height: 100%;
-  background: linear-gradient(180deg, transparent, #d4af37, transparent);
-  opacity: 0;
-  transition: opacity 0.4s ease;
+  border: 2px solid #E8E8ED;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
 .carCard:hover {
-  background: #000000;
-  border-color: rgba(212, 175, 55, 0.2);
-  transform: translateY(-8px);
-}
-
-.carCard:hover::before {
-  opacity: 1;
+  transform: translateY(-12px);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.15);
+  border-color: var(--primary);
 }
 
 .carDiscount {
   position: absolute;
-  top: 30px;
-  right: 30px;
-  background: rgba(212, 175, 55, 0.15);
-  border: 1px solid rgba(212, 175, 55, 0.5);
-  color: #d4af37;
-  padding: 6px 14px;
-  border-radius: 2px;
-  font-weight: 600;
-  font-size: 13px;
-  letter-spacing: 1px;
+  top: 20px;
+  right: 20px;
+  background: linear-gradient(135deg, #FF4D4D 0%, #FF8E53 100%);
+  color: #FFFFFF;
+  padding: 10px 20px;
+  border-radius: 50px;
+  font-weight: 900;
+  font-size: 18px;
+  box-shadow: 0 4px 16px rgba(255, 77, 77, 0.4);
   z-index: 2;
+  animation: pulse 2s infinite;
 }
 
 .carEmoji {
-  font-size: 64px;
+  font-size: 80px;
   text-align: center;
-  margin: 25px 0 30px;
-  filter: grayscale(20%);
+  padding: 40px 20px 20px;
+  background: linear-gradient(180deg, #F8F9FA 0%, #FFFFFF 100%);
+  position: relative;
 }
 
 .carTags {
   display: flex;
   gap: 8px;
   flex-wrap: wrap;
-  margin-bottom: 20px;
+  padding: 0 25px 20px;
 }
 
 .carTag {
-  background: transparent;
-  border: 1px solid rgba(212, 175, 55, 0.3);
-  color: #c9a961;
-  padding: 4px 10px;
-  border-radius: 2px;
-  font-size: 10px;
-  font-weight: 600;
+  background: linear-gradient(135deg, #4361EE 0%, #7209B7 100%);
+  color: #FFFFFF;
+  padding: 6px 16px;
+  border-radius: 50px;
+  font-size: 11px;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 8px rgba(67, 97, 238, 0.3);
 }
 
 .carTitle {
-  font-size: 22px;
-  font-weight: 400;
-  margin-bottom: 25px;
-  color: #ffffff;
-  letter-spacing: 0.5px;
+  font-size: 24px;
+  font-weight: 800;
+  margin-bottom: 20px;
+  color: #1D1D1F;
+  padding: 0 25px;
 }
 
 .carSpecs {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 14px;
-  margin-bottom: 25px;
-  padding-bottom: 25px;
-  border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+  gap: 12px;
+  padding: 0 25px 25px;
+  border-bottom: 2px solid #F5F5F7;
 }
 
 .carSpec {
-  font-size: 12px;
-  color: #888888;
+  font-size: 13px;
+  color: #666666;
   display: flex;
   align-items: center;
   gap: 8px;
-  letter-spacing: 0.5px;
+  font-weight: 500;
 }
 
 .carSpecIcon {
-  font-size: 14px;
-  opacity: 0.6;
+  font-size: 18px;
 }
 
 .carPriceSection {
-  margin-bottom: 25px;
-  padding: 25px 20px;
-  background: rgba(212, 175, 55, 0.03);
-  border-left: 2px solid rgba(212, 175, 55, 0.5);
+  padding: 25px;
+  background: linear-gradient(135deg, #FFF8E7 0%, #FFE8CC 100%);
 }
 
 .carOldPrice {
-  font-size: 13px;
+  font-size: 15px;
   text-decoration: line-through;
-  color: #666666;
-  margin-bottom: 8px;
-  letter-spacing: 0.5px;
+  color: #999999;
+  margin-bottom: 5px;
+  font-weight: 500;
 }
 
 .carPrice {
-  font-size: 28px;
-  font-weight: 300;
-  color: #d4af37;
-  letter-spacing: 1px;
+  font-size: 32px;
+  font-weight: 900;
+  color: #FF4D4D;
+  letter-spacing: -0.5px;
 }
 
 .carButton {
   display: block;
-  width: 100%;
-  padding: 16px;
-  background: transparent;
-  color: #d4af37;
+  width: calc(100% - 50px);
+  margin: 0 25px 25px;
+  padding: 18px;
+  background: linear-gradient(135deg, #FF4D4D 0%, #FF8E53 100%);
+  color: #FFFFFF;
   text-align: center;
   text-decoration: none;
-  border: 1px solid rgba(212, 175, 55, 0.5);
-  border-radius: 2px;
-  font-weight: 600;
-  font-size: 13px;
-  letter-spacing: 2px;
+  border-radius: 50px;
+  font-weight: 800;
+  font-size: 16px;
   text-transform: uppercase;
+  letter-spacing: 0.5px;
   transition: all 0.3s ease;
+  border: none;
   cursor: pointer;
+  box-shadow: 0 8px 24px rgba(255, 77, 77, 0.4);
 }
 
 .carButton:hover {
-  background: rgba(212, 175, 55, 0.1);
-  border-color: #d4af37;
-  transform: translateY(-2px);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(255, 77, 77, 0.5);
 }
 
 /* CTA Section */
 .cta {
   padding: 100px 20px;
-  background: #0a0a0a;
-  border-top: 1px solid rgba(212, 175, 55, 0.1);
+  background: linear-gradient(135deg, #4361EE 0%, #7209B7 50%, #FF4D4D 100%);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
   position: relative;
   overflow: hidden;
 }
@@ -413,11 +397,13 @@
 .cta::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: radial-gradient(ellipse at center, rgba(212, 175, 55, 0.08) 0%, transparent 70%);
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, transparent 70%);
+  border-radius: 50%;
+  top: -300px;
+  left: -300px;
+  animation: float 10s ease-in-out infinite;
 }
 
 .ctaContent {
@@ -429,74 +415,73 @@
 }
 
 .ctaTitle {
-  font-size: clamp(32px, 5vw, 56px);
-  font-weight: 300;
+  font-size: clamp(36px, 7vw, 64px);
+  font-weight: 900;
   margin-bottom: 25px;
-  letter-spacing: 1px;
+  color: #FFFFFF;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
   text-transform: uppercase;
 }
 
 .ctaText {
-  font-size: clamp(16px, 2.5vw, 20px);
+  font-size: clamp(18px, 3vw, 24px);
   margin-bottom: 50px;
-  line-height: 1.6;
-  color: #b8b8b8;
-  letter-spacing: 0.5px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.95);
+  font-weight: 500;
 }
 
 .ctaButton {
   display: inline-block;
-  padding: 20px 60px;
-  background: transparent;
-  color: #d4af37;
+  padding: 24px 64px;
+  background: #FFB800;
+  color: #1D1D1F;
   text-decoration: none;
-  border: 2px solid #d4af37;
-  border-radius: 2px;
-  font-weight: 600;
-  font-size: 14px;
-  letter-spacing: 3px;
+  border-radius: 50px;
+  font-weight: 900;
+  font-size: 20px;
+  letter-spacing: 0.5px;
   text-transform: uppercase;
   transition: all 0.3s ease;
+  box-shadow: 0 12px 36px rgba(255, 184, 0, 0.5);
+  animation: pulse 2s infinite;
 }
 
 .ctaButton:hover {
-  background: rgba(212, 175, 55, 0.1);
-  transform: translateY(-3px);
-  box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 16px 48px rgba(255, 184, 0, 0.6);
 }
 
 .ctaNote {
   margin-top: 40px;
-  font-size: 13px;
-  color: #888888;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 600;
 }
 
 /* Footer */
 .footer {
   padding: 50px 20px;
-  background: #000000;
+  background: #1D1D1F;
   text-align: center;
-  border-top: 1px solid rgba(212, 175, 55, 0.1);
+  color: #FFFFFF;
 }
 
 .footer p {
   margin: 12px 0;
-  color: #666666;
-  font-size: 13px;
-  letter-spacing: 0.5px;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 14px;
 }
 
 .footerNote {
   margin-top: 30px;
   padding: 20px;
-  background: rgba(212, 175, 55, 0.05);
-  border: 1px solid rgba(212, 175, 55, 0.2);
-  border-radius: 2px;
-  font-size: 12px;
-  color: #888888;
-  letter-spacing: 0.5px;
+  background: rgba(255, 77, 77, 0.1);
+  border: 2px solid rgba(255, 77, 77, 0.3);
+  border-radius: 16px;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 600;
 }
 
 /* Responsive */
@@ -507,32 +492,31 @@
   }
 
   .badge {
-    font-size: 11px;
-    padding: 8px 20px;
-    letter-spacing: 2px;
+    font-size: 12px;
+    padding: 10px 24px;
   }
   
   .timerBoxes {
-    gap: 8px;
+    gap: 10px;
   }
 
   .timerBox {
-    min-width: 70px;
-    padding: 15px 18px;
+    min-width: 80px;
+    padding: 15px 20px;
   }
 
   .timerSeparator {
-    font-size: 24px;
+    font-size: 28px;
   }
 
   .carsGrid {
     grid-template-columns: 1fr;
-    gap: 1px;
+    gap: 25px;
   }
 
   .statsGrid {
     grid-template-columns: 1fr;
-    gap: 1px;
+    gap: 20px;
   }
 
   .timer {
@@ -541,26 +525,26 @@
 }
 
 @media (max-width: 480px) {
-  .hero {
-    padding: 20px 15px;
-  }
-
   .timerBox {
-    min-width: 60px;
-    padding: 12px 15px;
+    min-width: 70px;
+    padding: 12px 16px;
   }
 
   .carCard {
-    padding: 25px 20px;
+    border-radius: 20px;
   }
 
   .carEmoji {
-    font-size: 52px;
+    font-size: 64px;
+    padding: 30px 20px 15px;
+  }
+
+  .carTitle {
+    font-size: 21px;
   }
 
   .ctaButton {
-    padding: 18px 40px;
-    font-size: 12px;
-    letter-spacing: 2px;
+    padding: 20px 48px;
+    font-size: 16px;
   }
 }
