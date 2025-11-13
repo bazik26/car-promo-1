@@ -93,6 +93,7 @@
   scroll-snap-type: y mandatory;
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
+  touch-action: pan-y;
 }
 
 .scrollContainer::-webkit-scrollbar {

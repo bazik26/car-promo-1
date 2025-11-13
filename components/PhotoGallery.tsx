@@ -22,12 +22,17 @@ export default function PhotoGallery({ photos, getFileUrl }: PhotoGalleryProps) 
   }
 
   const handleDragEnd = (event: any, info: any) => {
-    const threshold = 50;
-    if (info.offset.x > threshold && currentPhotoIndex > 0) {
+    const threshold = 30; // Снизил порог для более легкого свайпа
+    const velocity = Math.abs(info.velocity.x);
+    
+    // Если быстрый свайп - достаточно меньшего расстояния
+    const effectiveThreshold = velocity > 500 ? 20 : threshold;
+    
+    if (info.offset.x > effectiveThreshold && currentPhotoIndex > 0) {
       // Swipe right - предыдущее фото
       setCurrentPhotoIndex(currentPhotoIndex - 1);
       setDragDirection(-1);
-    } else if (info.offset.x < -threshold && currentPhotoIndex < photos.length - 1) {
+    } else if (info.offset.x < -effectiveThreshold && currentPhotoIndex < photos.length - 1) {
       // Swipe left - следующее фото
       setCurrentPhotoIndex(currentPhotoIndex + 1);
       setDragDirection(1);
@@ -49,10 +54,14 @@ export default function PhotoGallery({ photos, getFileUrl }: PhotoGalleryProps) 
             initial={{ opacity: 0, x: dragDirection > 0 ? 100 : -100 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: dragDirection > 0 ? -100 : 100 }}
-            transition={{ duration: 0.3 }}
+            transition={{ 
+              duration: 0.3,
+              ease: [0.4, 0, 0.2, 1]
+            }}
             drag="x"
             dragConstraints={{ left: 0, right: 0 }}
-            dragElastic={0.2}
+            dragElastic={0.3}
+            dragMomentum={false}
             onDragEnd={handleDragEnd}
             className={styles.photo}
             style={{
@@ -60,7 +69,9 @@ export default function PhotoGallery({ photos, getFileUrl }: PhotoGalleryProps) 
             }}
           >
             {/* Индикатор свайпа */}
-            <div className={styles.swipeHint}>← Свайпните →</div>
+            {photos.length > 1 && (
+              <div className={styles.swipeHint}>← Свайпните →</div>
+            )}
           </motion.div>
         </AnimatePresence>
 
