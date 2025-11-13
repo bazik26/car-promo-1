@@ -5,8 +5,9 @@
   "scripts": {
     "dev": "next dev -p 3003",
     "build": "next build",
-    "start": "next start -p ${PORT:-3003}",
-    "lint": "next lint"
+    "start": "NODE_ENV=production next start -p ${PORT:-3003}",
+    "lint": "next lint",
+    "postinstall": "npm list next || npm install next"
   },
   "engines": {
     "node": ">=18.0.0",
